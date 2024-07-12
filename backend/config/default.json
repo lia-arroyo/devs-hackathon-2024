@@ -9,5 +9,5 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://127.0.0.1:27017/backend"
+  "mongodb": "mongodb://127.0.0.1:27017/slay"
 }
