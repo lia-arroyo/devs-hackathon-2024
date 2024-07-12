@@ -1,5 +1,7 @@
+import classes from './Pages.module.css';
+
 const CreateGroupPage = () => {
-  return <>create group</>;
+  return <div className={classes.pageContainer}>create group</div>;
 };
 
 export default CreateGroupPage;
