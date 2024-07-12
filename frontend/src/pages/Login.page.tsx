@@ -1,5 +1,12 @@
+import BubblyBackground from '@/components/BubbleBackground/BubbleBackground';
+
 const LoginPage = () => {
-  return <>Login</>;
+  return (
+    <>
+      <BubblyBackground />
+      Login
+    </>
+  );
 };
 
 export default LoginPage;
