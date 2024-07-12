@@ -1,4 +1,4 @@
-import { Title, Text, Anchor } from '@mantine/core';
+import { Title, Text, Anchor, Button } from '@mantine/core';
 import classes from './Welcome.module.css';
 
 export function Welcome() {
@@ -18,6 +18,7 @@ export function Welcome() {
         </Anchor>
         . To get started edit pages/Home.page.tsx file.
       </Text>
+      <Button color="navyBlue.7">Light</Button>
     </>
   );
 }

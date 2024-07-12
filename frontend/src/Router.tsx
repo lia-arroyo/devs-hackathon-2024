@@ -1,10 +1,30 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HomePage } from './pages/Home.page';
+import LoginPage from './pages/Login.page';
+import SignupPage from './pages/Signup.page';
+import CreateGroupPage from './pages/CreateGroup.page';
+import GroupPage from './pages/Group.page';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
+  },
+  {
+    path: '/signup',
+    element: <SignupPage />,
+  },
+  {
+    path: '/group/create',
+    element: <CreateGroupPage />,
+  },
+  {
+    path: '/group',
+    element: <GroupPage />,
   },
 ]);
 
