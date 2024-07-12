@@ -1,5 +1,5 @@
-import { Welcome } from '../components/Welcome/Welcome';
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
+import { Welcome } from '../components/Demo_Welcome/Welcome';
+import { ColorSchemeToggle } from '../components/Demo_ColorSchemeToggle/ColorSchemeToggle';
 
 export function HomePage() {
   return (
