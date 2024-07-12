@@ -5,7 +5,7 @@ import socketio from '@feathersjs/socketio-client';
 import authentication from '@feathersjs/authentication-client';
 import * as API_ROUTE from './API_ROUTES';
 
-const API_URI = 'http://localhost:3000/api';
+const API_URI = 'http://localhost:3030/';
 
 export interface Configuration {
     connection: TransportConnection<ServiceTypes>;
