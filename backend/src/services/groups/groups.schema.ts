@@ -20,6 +20,7 @@ export const groupsSchema = {
     groupType: { type: 'string', enum: groupTypes },
     ownerId:{ type: 'string' },
     groupCode: { type: 'string' },
+    stakes: { type: 'string' },
   }
 } as const
 export type Groups = FromSchema<typeof groupsSchema>
