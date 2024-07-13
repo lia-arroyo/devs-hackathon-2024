@@ -7,7 +7,7 @@ export function WaterEntryModal() {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Water Entry">
+      <Modal opened={opened} onClose={close} title="Water Entry" centered>
         <WaterEntry />
       </Modal>
 
