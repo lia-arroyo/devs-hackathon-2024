@@ -1,6 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { FeatherContext } from '@/api/FeatherContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { IconLogout } from '@tabler/icons-react';
+import classes from './CheckLogin.module.css';
+import { SignoutButton } from '../SignoutButton/SignoutButton';
 
 export function CheckLogin() {
   const navigate = useNavigate();
@@ -11,12 +14,16 @@ export function CheckLogin() {
       try {
         await featherContext?.reAuthenticate();
       } catch {
-        console.log("Not logged in")
+        console.log('Not logged in');
         navigate('/login');
       }
     };
     checkAuth();
   }, [navigate, featherContext]);
 
-  return <></>;
+  return (
+    <div className={classes.logout}>
+      <SignoutButton />
+    </div>
+  );
 }
