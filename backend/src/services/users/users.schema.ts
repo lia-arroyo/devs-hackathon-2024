@@ -46,7 +46,9 @@ export const userDataSchema = {
 export type UserData = FromSchema<typeof userDataSchema>
 export const userDataValidator = getValidator(userDataSchema, dataValidator)
 export const userDataResolver = resolve<UserData, HookContext<UserService>>({
-  password: passwordHash({ strategy: 'local' })
+  password: passwordHash({ strategy: 'local' }),
+  waterIntake: async () => 0, // Set default value for waterIntake on user creation
+  stepsTaken: async () => 0 // Set default value for stepsTaken on user creation
 })
 
 // Schema for updating existing data
