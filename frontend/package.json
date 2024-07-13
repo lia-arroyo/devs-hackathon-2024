@@ -19,13 +19,17 @@
     "storybook:build": "storybook build"
   },
   "dependencies": {
+    "@feathersjs/authentication-client": "^5.0.29",
+    "@feathersjs/feathers": "^5.0.29",
+    "@feathersjs/socketio-client": "^5.0.29",
     "@mantine/core": "^7.11.1",
     "@mantine/hooks": "^7.11.1",
     "bubbly-bg": "^1.0.0",
     "framer-motion": "^11.3.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.23.1"
+    "react-router-dom": "^6.23.1",
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.1.10",
