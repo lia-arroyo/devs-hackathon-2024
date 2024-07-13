@@ -11,6 +11,7 @@ export function CheckLogin() {
       try {
         await featherContext?.reAuthenticate();
       } catch {
+        console.log("Not logged in")
         navigate('/');
       }
     };
