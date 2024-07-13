@@ -4,9 +4,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { IconLogout } from '@tabler/icons-react';
 import classes from './CheckLogin.module.css';
 import { SignoutButton } from '../SignoutButton/SignoutButton';
+import ViewGroupButton from '../ViewGroupButton/ViewGroupButton';
+import { Group } from '@mantine/core';
 
 export function CheckLogin() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
   const featherContext = useContext(FeatherContext);
 
   useEffect(() => {
@@ -22,8 +26,9 @@ export function CheckLogin() {
   }, [navigate, featherContext]);
 
   return (
-    <div className={classes.logout}>
+    <Group className={classes.logout}>
+      {currentPath !== '/' && <ViewGroupButton />}
       <SignoutButton />
-    </div>
+    </Group>
   );
 }
