@@ -18,3 +18,7 @@
   background-color: transparent;
   margin: 0;
 }
+
+label {
+  color: var(--mantine-color-navyBlue-9);
+}
