@@ -40,7 +40,7 @@ const GroupPage = () => {
         </div>
         <Group mt={10}>
           <WaterEntryModal />
-          <LeaderboardModal />
+          <LeaderboardModal code={''} />
           <Button
             leftSection={<IconBrandTrello size={20} />}
             variant="gradient"

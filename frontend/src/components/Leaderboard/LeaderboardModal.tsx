@@ -3,16 +3,20 @@ import { Modal, Button } from '@mantine/core';
 import { Leaderboard } from './Leaderboard';
 import { IconBrandTrello } from '@tabler/icons-react';
 
-export function LeaderboardModal() {
+export function LeaderboardModal({ code }: { code: string }) {
   const [opened, { open, close }] = useDisclosure(false);
   const groupCode: string = '49167101';
   console.log('GROUP CODE IS HARDCODED!!!!!! TO ' + groupCode);
+
+  if (code === undefined || code === '') {
+    code = groupCode;
+  }
 
   return (
     <>
       <Modal opened={opened} onClose={close} title="Leaderboard" centered>
         {/* Modal content */}
-        <Leaderboard code={groupCode} />
+        <Leaderboard code={code} />
       </Modal>
 
       <Button
