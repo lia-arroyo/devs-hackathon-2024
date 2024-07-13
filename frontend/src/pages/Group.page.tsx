@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { WaterEntryModal } from '@/components/WaterEntry/WaterEntryModal';
 import { IconBrandTrello, IconPlus } from '@tabler/icons-react';
 import { motion } from "framer-motion"
+import {CheckLogin} from "@/components/CheckLogin/CheckLogin";
 
 const GroupPage = () => {
   const data = ["Jolin's", "Lia's"];
@@ -14,7 +15,7 @@ const GroupPage = () => {
 
   return (
     <div className={classes.pageContainer}>
-
+      <CheckLogin/>
       <BackgroundImage src={bg} className={classes.background}>
         <Text size="sm" color="navyBlue.8">
           Group Name

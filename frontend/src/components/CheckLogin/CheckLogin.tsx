@@ -12,7 +12,7 @@ export function CheckLogin() {
         await featherContext?.reAuthenticate();
       } catch {
         console.log("Not logged in")
-        navigate('/');
+        navigate('/login');
       }
     };
     checkAuth();
