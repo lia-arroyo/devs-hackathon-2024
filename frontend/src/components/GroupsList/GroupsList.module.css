@@ -18,7 +18,7 @@
 }
 
 .listItem {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   margin: 0.2rem;
   color: var(--mantine-color-skyBlue-5);
   border-color: var(--mantine-color-skyBlue-5);
