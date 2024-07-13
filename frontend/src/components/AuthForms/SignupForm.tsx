@@ -48,17 +48,18 @@ export function SignupForm() {
 
   return (
     <Paper radius="lg" style={backgrundColor} className={classes.container}>
-      <Title ta="center" className={classes.title}>
+      <Title ta="center" order={2} c="navyBlue.9">
         Register here!
       </Title>
 
-      <Paper p={30} mt={30} className={classes.form}>
+      <Paper mt={10} className={classes.form}>
         <TextInput
           label="Email"
           placeholder="you@mantine.dev"
           value={email}
           onChange={(event) => setEmail(event.currentTarget.value)}
           required
+          classNames={{ label: classes.label }}
         />
         <TextInput
           label="Username"
@@ -66,6 +67,7 @@ export function SignupForm() {
           value={username}
           onChange={(event) => setUsername(event.currentTarget.value)}
           required
+          classNames={{ label: classes.label }}
         />
         <PasswordInput
           label="Password"
@@ -74,6 +76,7 @@ export function SignupForm() {
           onChange={(event) => setPassword(event.currentTarget.value)}
           required
           mt="md"
+          classNames={{ label: classes.label }}
         />
         <Button
           fullWidth
@@ -86,7 +89,13 @@ export function SignupForm() {
         </Button>
         <Text c="dimmed" size="sm" ta="center" mt={5}>
           Already have an account?{' '}
-          <Anchor size="sm" component="button">
+          <Anchor
+            size="sm"
+            component="button"
+            onClick={() => {
+              navigate('/login');
+            }}
+          >
             Login here
           </Anchor>
         </Text>
