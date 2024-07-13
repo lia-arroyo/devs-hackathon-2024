@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     element: <CreateGroupPage />,
   },
   {
-    path: '/group',
+    path: '/group/:id',
     element: <GroupPage />,
   },
 ]);
