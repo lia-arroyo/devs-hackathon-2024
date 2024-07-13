@@ -80,24 +80,36 @@ export function Leaderboard() {
   const rows = data.map((row) => (
     <Table.Tr key={row.position}>
       <Table.Td>#{row.position}</Table.Td>
-      <Table.Td>{row.name}</Table.Td>
       <Table.Td>
-        <Center inline>
-          {row.cupsDrank}
-          {GetWaterIcon(row.cupsDrank)}
-        </Center>
+        <Center>{row.name}</Center>
+      </Table.Td>
+      <Table.Td>
+        {/* <div style={{ width: rem(76) }}> */}
+        <Flex justify="flex-end" align="flex-end">
+          <Center inline>
+            {row.cupsDrank}
+            {GetWaterIcon(row.cupsDrank)}
+          </Center>
+        </Flex>
+        {/* </div> */}
       </Table.Td>
     </Table.Tr>
   ));
 
   return (
     <ScrollArea h={300} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-      <Table miw={700}>
+      <Table miw={700} striped>
         <Table.Thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
           <Table.Tr>
             <Table.Th>Position</Table.Th>
-            <Table.Th>Name</Table.Th>
-            <Table.Th>Cups Drank</Table.Th>
+            <Table.Th>
+              <Center>Name</Center>
+            </Table.Th>
+            <Table.Th>
+              <Flex justify="flex-end" align="flex-end">
+                Cups Drank
+              </Flex>
+            </Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>
