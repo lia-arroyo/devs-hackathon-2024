@@ -28,7 +28,7 @@ const GroupPage = () => {
   const waterColor = { backgroundColor: convertToRGBA(colors.skyBlue[9], 0.8) };
 
   return (
-    <div className={classes.pageContainer}>
+    <div className={classes.pageContainer} style={{ backgroundColor: colors.skyBlue[1] }}>
       <BackgroundImage src={bg} className={classes.background}>
         <Text size="sm" color="navyBlue.8">
           Group Name
