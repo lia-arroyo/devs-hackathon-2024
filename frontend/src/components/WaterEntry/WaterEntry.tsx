@@ -42,11 +42,12 @@ export function WaterEntry() {
     },
   ];
 
-  const handleDrinkButton = () => {
+  const handleDrinkUp = () => {
     setAmountDrank(amountDrank + 1);
 
     // change icon to full droplet
-    setDrinkIcon(<IconDropletFilled style={styles.droplet} />);
+    setDrinkIcon(<IconDroplet style={styles.droplet} />);
+
     // wait 0.5 second
     setTimeout(() => {
       setDrinkIcon(<IconDropletHalf2Filled style={styles.droplet} />);
@@ -54,30 +55,65 @@ export function WaterEntry() {
 
     // wait 1 second
     setTimeout(() => {
-      setDrinkIcon(<IconDroplet style={styles.droplet} />);
+      setDrinkIcon(<IconDropletFilled style={styles.droplet} />);
     }, 1000);
   };
 
-  const hoverDrinkButton = () => {
-    // fill droplet
-    setDrinkIcon(<IconDropletFilled style={styles.droplet} />);
+  const handleDrinkDown = () => {
+    setAmountDrank(amountDrank - 1);
+
+    // wait 0.5 second
+    setTimeout(() => {
+      setDrinkIcon(<IconDropletFilled style={styles.droplet} />);
+    }, 500);
+
+    // wait 1 second
+    setTimeout(() => {
+      setDrinkIcon(<IconDropletHalf2Filled style={styles.droplet} />);
+    }, 1000);
+
+    // wait 1 second
+    setTimeout(() => {
+      setDrinkIcon(<IconDroplet style={styles.droplet} />);
+    }, 1500);
   };
 
   return (
     <div>
       <Flex mih={rem(250)} direction="column" justify="space-between" align="center">
         <SegmentedControl radius="xl" size="md" classNames={classes} data={headerButtonLabels} />
-        <Text size={rem(32)}>{amountDrank}</Text>
-        <ActionIcon
-          variant="filled"
-          aria-label="drink"
-          onClick={handleDrinkButton}
-          onMouseEnter={hoverDrinkButton}
-          size={rem(128)}
-          color="navyBlue.7"
-        >
+        <Center>
+          <Text size={rem(32)}>{amountDrank}</Text>
           {drinkIcon}
-        </ActionIcon>
+        </Center>
+        <Center
+          style={{
+            width: '25%',
+            display: 'flex',
+            justifyContent: 'space-evenly',
+          }}
+        >
+          <ActionIcon
+            variant="filled"
+            aria-label="drink"
+            onClick={handleDrinkDown}
+            size={rem(40)}
+            color="navyBlue.7"
+            disabled={amountDrank == 0}
+          >
+            -
+          </ActionIcon>
+          <ActionIcon
+            variant="filled"
+            aria-label="drink"
+            onClick={handleDrinkUp}
+            size={rem(40)}
+            color="navyBlue.7"
+          >
+            +
+          </ActionIcon>
+        </Center>
+        <Button>Confirm</Button>
       </Flex>
     </div>
   );

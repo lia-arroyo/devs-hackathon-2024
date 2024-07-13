@@ -2,7 +2,8 @@ import { BackgroundImage, Button, Flex, Group, Select, Text, Title } from '@mant
 import classes from './Pages.module.css';
 import bg from '../assets/background.png';
 import { useState } from 'react';
-import { IconBrandTrello, IconPlus } from '@tabler/icons-react';
+import { IconBrandTrello } from '@tabler/icons-react';
+import { WaterEntryModal } from '@/components/WaterEntry/WaterEntryModal';
 
 const GroupPage = () => {
   const data = ["Jolin's", "Lia's"];
@@ -22,9 +23,7 @@ const GroupPage = () => {
           </Text>
         </div>
         <Group mt={10}>
-          <Button leftSection={<IconPlus size={20} />} variant="gradient" size="sm">
-            Record Drink
-          </Button>
+          <WaterEntryModal />
           <Button leftSection={<IconBrandTrello size={20} />} variant="gradient" size="sm">
             Leaderboard
           </Button>
