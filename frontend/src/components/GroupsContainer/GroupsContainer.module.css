@@ -5,4 +5,8 @@
   height: 80%;
   width: 50%;
   max-width: 800px;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

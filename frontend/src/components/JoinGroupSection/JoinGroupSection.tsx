@@ -7,7 +7,7 @@ const JoinGroupSection = () => {
   const placeholderText = 'Enter group code here';
   return (
     <Container style={{ margin: 0, padding: 0 }}>
-      <Title order={4} ta="center" my={6}>
+      <Title order={4} ta="center" my={6} c="navyBlue.9">
         Join Group
       </Title>
       <Center>

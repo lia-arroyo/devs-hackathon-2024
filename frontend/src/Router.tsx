@@ -9,7 +9,7 @@ import ViewGroupsPage from './pages/ViewGroups.page';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: <ViewGroupsPage />,
   },
   {
     path: '/login',
@@ -26,10 +26,6 @@ const router = createBrowserRouter([
   {
     path: '/group',
     element: <GroupPage />,
-  },
-  {
-    path: '/groups',
-    element: <ViewGroupsPage />,
   },
 ]);
 

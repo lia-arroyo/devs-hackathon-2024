@@ -9,12 +9,12 @@ const GroupsList = () => {
 
   return (
     <Container className={classes.groupsContainer}>
-      <Title order={4} ta="center" my={6}>
+      <Title order={4} ta="center" my={6} c="navyBlue.9">
         Your Accountabuddies
       </Title>
       <div className={classes.groupList}>
         {groups.map((group) => (
-          <Button variant="outline" fullWidth className={classes.listItem}>
+          <Button variant="outline" fullWidth className={classes.listItem} size="md">
             Group {group}
           </Button>
         ))}
@@ -22,6 +22,7 @@ const GroupsList = () => {
           variant="outline"
           fullWidth
           className={classes.listItem}
+          size="md"
           leftSection={<IconPlus size={20} />}
           onClick={() => {
             navigate('/group/create');

@@ -10,7 +10,7 @@ const GroupsContainer = () => {
   return (
     <Container style={backgroundColor} className={classes.groupsContainer}>
       <GroupsList />
-      <Divider my="lg" size="sm" color="skyBlue.6" />
+      <Divider my={20} size="sm" color="navyBlue.8" />
       <JoinGroupSection />
     </Container>
   );
