@@ -12,7 +12,7 @@ export const groupsSchema = {
   $id: 'Groups',
   type: 'object',
   additionalProperties: false,
-  required: ['_id', 'name', 'groupType', 'ownerId'],
+  required: ['_id'],
   properties: {
     _id: ObjectIdSchema(),
     name: {type: 'string'},
@@ -34,7 +34,7 @@ export const groupsDataSchema = {
   $id: 'GroupsData',
   type: 'object',
   additionalProperties: false,
-  required: [],
+  required: ['name', 'groupType', 'ownerId'],
   properties: {
     ...groupsSchema.properties
   }
