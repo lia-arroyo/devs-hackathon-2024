@@ -15,6 +15,7 @@ import { convertToRGBA } from '@/utils/convertToRgba';
 import {useContext, useState} from "react";
 import {FeatherContext} from "@/api/FeatherContext";
 import {useNavigate} from "react-router-dom";
+import {usersPath} from "@/api/API_ROUTES";
 
 export function SignupForm() {
     // Styling
@@ -31,11 +32,16 @@ export function SignupForm() {
 
     async function _onSignUp() {
         try {
-            await featherContext?.service('users').create({
+            await featherContext?.service(usersPath).create({
                 email: email,
                 name: username,
                 password: password,
             })
+            await featherContext?.authenticate({
+                strategy: 'local',
+                email: email,
+                password: password,
+            });
             navigate('/');
         } catch {
             console.log("Error creating");
