@@ -93,7 +93,7 @@ waterIntakes.push({userId: _id.toString(), name, waterIntake})
       const waterIntakeA = a.waterIntake !== undefined ? a.waterIntake : 0;
       const waterIntakeB = b.waterIntake !== undefined ? b.waterIntake : 0;
 
-      return waterIntakeA - waterIntakeB;
+      return waterIntakeB - waterIntakeA;
     });
 return waterIntakes
   }
