@@ -21,7 +21,7 @@ export class GroupsService<ServiceParams extends Params = GroupsParams> extends 
   async joinGroup(data: {groupCode: string , userId: string}){
     const groupQuery =  await this.find({query:{groupCode: data.groupCode}})
     const group = groupQuery.data[0] as Group;
-
+    group.members = group.members || []
     group.members.push(data.userId)
 
     const groupId = typeof group._id === 'object' ? group._id.toString() : group._id
