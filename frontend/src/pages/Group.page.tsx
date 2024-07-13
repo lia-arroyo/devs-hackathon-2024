@@ -1,11 +1,21 @@
-import {BackgroundImage, Button, Flex, Group, Select, Text, Title, Transition} from '@mantine/core';
+import {
+  BackgroundImage,
+  Button,
+  Flex,
+  Group,
+  Select,
+  Text,
+  Title,
+  Transition,
+} from '@mantine/core';
 import classes from './Pages.module.css';
 import bg from '../assets/background.png';
 import { useState } from 'react';
 import { WaterEntryModal } from '@/components/WaterEntry/WaterEntryModal';
 import { IconBrandTrello, IconPlus } from '@tabler/icons-react';
-import { motion } from "framer-motion"
-import {CheckLogin} from "@/components/CheckLogin/CheckLogin";
+import { motion } from 'framer-motion';
+import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
+import { LeaderboardModal } from '@/components/Leaderboard/LeaderboardModal';
 
 const GroupPage = () => {
   const data = ["Jolin's", "Lia's"];
@@ -15,7 +25,7 @@ const GroupPage = () => {
 
   return (
     <div className={classes.pageContainer}>
-      <CheckLogin/>
+      <CheckLogin />
       <BackgroundImage src={bg} className={classes.background}>
         <Text size="sm" color="navyBlue.8">
           Group Name
@@ -30,33 +40,46 @@ const GroupPage = () => {
         </div>
         <Group mt={10}>
           <WaterEntryModal />
-          <Button leftSection={<IconBrandTrello size={20} />} variant="gradient" size="sm">
-            Leaderboard
-          </Button>
-          <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
-            setPercentage('0%')
-          }}>
+          <LeaderboardModal />
+          <Button
+            leftSection={<IconBrandTrello size={20} />}
+            variant="gradient"
+            size="sm"
+            onClick={() => {
+              setPercentage('0%');
+            }}
+          >
             100
           </Button>
-          <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
-            setPercentage('50%')
-          }}>
+          <Button
+            leftSection={<IconBrandTrello size={20} />}
+            variant="gradient"
+            size="sm"
+            onClick={() => {
+              setPercentage('50%');
+            }}
+          >
             50
           </Button>
-          <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
-            setPercentage('100%')
-          }}>
+          <Button
+            leftSection={<IconBrandTrello size={20} />}
+            variant="gradient"
+            size="sm"
+            onClick={() => {
+              setPercentage('100%');
+            }}
+          >
             0
           </Button>
         </Group>
         <div className={classes.waveContainer}>
           <motion.div
-              className={classes.pageContainer}
-              initial={{y: 0}}  // Initial position based on yPos
-              animate={{y: percentage, opacity: 1}}  // Animation when component loads or yPos changes
-              transition={{ type: 'spring', damping: 6, stiffness: 20, duration: 4 }}
+            className={classes.pageContainer}
+            initial={{ y: 0 }} // Initial position based on yPos
+            animate={{ y: percentage, opacity: 1 }} // Animation when component loads or yPos changes
+            transition={{ type: 'spring', damping: 6, stiffness: 20, duration: 4 }}
           >
-            <div className={classes.waveBackground}/>
+            <div className={classes.waveBackground} />
           </motion.div>
         </div>
       </BackgroundImage>

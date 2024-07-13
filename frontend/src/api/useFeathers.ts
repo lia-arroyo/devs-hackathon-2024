@@ -35,7 +35,7 @@ interface GroupSocketService extends SocketService {
     groupCode: string;
     stakes: string;
   }>;
-  leaderboard: (data: { groupCode: string }) => Promise<{ waterIntakes: WaterIntakeData[] }>;
+  leaderboard: (data: { groupCode: string }) => Promise<WaterIntakeData[]>;
 }
 
 type ServiceTypes = {

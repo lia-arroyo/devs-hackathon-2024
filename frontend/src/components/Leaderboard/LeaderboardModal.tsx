@@ -1,6 +1,7 @@
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button } from '@mantine/core';
 import { Leaderboard } from './Leaderboard';
+import { IconBrandTrello } from '@tabler/icons-react';
 
 export function LeaderboardModal() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -13,7 +14,14 @@ export function LeaderboardModal() {
         <Leaderboard code={groupCode} />
       </Modal>
 
-      <Button onClick={open}>Leaderboard</Button>
+      <Button
+        onClick={open}
+        leftSection={<IconBrandTrello size={20} />}
+        variant="gradient"
+        size="sm"
+      >
+        Leaderboard
+      </Button>
     </>
   );
 }

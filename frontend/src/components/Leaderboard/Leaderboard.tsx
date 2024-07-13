@@ -23,31 +23,42 @@ export function Leaderboard({ code }: { code: string }) {
   // Featherjs
   const featherContext = useContext(FeatherContext);
   const retrieveLeaderboard = async () => {
-    return await featherContext?.service(groupsPath).leaderboard({ groupCode: code });
+    const res = await featherContext?.service(groupsPath).leaderboard({ groupCode: code });
+    // console.log('aha');
+    // console.log(res);
+    return res;
   };
   const [scrolled, setScrolled] = useState(false);
-  const [leaderboardData, setLeaderboardData] = useState<WaterIntakeData[] | undefined>([]);
+  const [leaderboardData, setLeaderboardData] = useState<WaterIntakeData[]>([]);
 
-  const data: WaterIntakeData[] = [];
+  // const data: WaterIntakeData[] = [];
 
   useEffect(() => {
+    console.log('fetching leaderboard');
     retrieveLeaderboard().then((res) => {
-      // sort the data by waterIntake
-      const sortedData = res?.waterIntakes.sort((a, b) => b.waterIntake - a.waterIntake);
-      // add position
-      sortedData?.forEach((row, i) => (row.position = i + 1));
+      // // sort the data by waterIntake
+      // const sortedData = res?.waterIntakes.sort((a, b) => b.waterIntake - a.waterIntake);
+      // // add position
+      res?.forEach((row, i) => (row.position = i + 1));
 
-      setLeaderboardData(sortedData);
+      // console.log(res);
+      //setLeaderboardData(res?.waterIntakes);
+      //console.log('res', res?.waterIntakes);
+
+      setLeaderboardData(res || []);
     });
   }, []);
 
-  const totalCups = data.reduce((total, row) => total + row?.waterIntake, 0);
-  const maxCups = data.reduce((max, row) => (row.waterIntake > max ? row.waterIntake : max), 0);
-  const halfCups = data.reduce(
-    (half, row) => (row.waterIntake === maxCups / 2 ? row.waterIntake : half),
-    maxCups / 2
+  const totalCups = leaderboardData?.reduce((total, row) => total + row?.waterIntake, 0);
+  const maxCups = leaderboardData?.reduce(
+    (max, row) => (row.waterIntake > max ? row.waterIntake : max),
+    0
   );
-  const minCups = data.reduce(
+  const halfCups = leaderboardData?.reduce(
+    (half, row) => (row.waterIntake === maxCups ?? 1 / 2 ? row.waterIntake : half),
+    maxCups ?? 1 / 2
+  );
+  const minCups = leaderboardData?.reduce(
     (min, row) => (row.waterIntake < min ? row.waterIntake : min),
     Infinity
   );
@@ -56,7 +67,7 @@ export function Leaderboard({ code }: { code: string }) {
     // if the user drank the most cups
     if (waterIntake === maxCups) return <IconDropletFilled stroke={2} style={styles.waterIcon} />;
 
-    if (waterIntake > halfCups && waterIntake < maxCups)
+    if (waterIntake > (halfCups ?? 0) && waterIntake < maxCups)
       return <IconDropletHalf2Filled stroke={2} style={styles.waterIcon} />;
 
     // if the user drank half the cups
@@ -70,7 +81,7 @@ export function Leaderboard({ code }: { code: string }) {
       return <IconDropletExclamation stroke={2} style={styles.waterIcon} />;
   };
 
-  const rows = data.map((row) => (
+  const rows = leaderboardData?.map((row) => (
     <Table.Tr key={row.position}>
       <Table.Td>#{row.position}</Table.Td>
       <Table.Td>
