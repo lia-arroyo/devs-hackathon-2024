@@ -1,39 +1,35 @@
-import { Container, NavLink, Text } from '@mantine/core';
+import { Button, Container, NavLink, Text, Title } from '@mantine/core';
 import classes from './GroupsList.module.css';
+import { IconPlus } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
 
 const GroupsList = () => {
   const groups = [1, 2, 3, 4];
+  const navigate = useNavigate();
 
   return (
     <Container className={classes.groupsContainer}>
-      <Text size="xl" ta="center">
+      <Title order={4} ta="center" my={6}>
         Your Accountabuddies
-      </Text>
-      <div>
+      </Title>
+      <div className={classes.groupList}>
         {groups.map((group) => (
-          <NavLink
-            label={`Group ${group}`}
-            style={{
-              borderRadius: 5,
-              marginTop: 10,
-              marginBottom: 10,
-              backgroundColor: 'white',   
-            }}
-            ta="center"
-          />
+          <Button variant="outline" fullWidth className={classes.listItem}>
+            Group {group}
+          </Button>
         ))}
+        <Button
+          variant="outline"
+          fullWidth
+          className={classes.listItem}
+          leftSection={<IconPlus size={20} />}
+          onClick={() => {
+            navigate('/group/create');
+          }}
+        >
+          Create New Group
+        </Button>
       </div>
-      <NavLink
-        label="+ Create New Group"
-        href="/group/create"
-        style={{
-          borderRadius: 5,
-          marginTop: 10,
-          marginBottom: 10,
-          backgroundColor: 'white',
-        }}
-        ta="center"
-      />
     </Container>
   );
 };
