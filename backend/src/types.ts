@@ -5,7 +5,7 @@ export interface Group {
     groupType: 'water' | 'steps'
     ownerId: string,
     groupCode : string,
-    stakes: string,
+    stakes: string | ''
 
 }
 export type GroupsPatch = Partial<Group>;

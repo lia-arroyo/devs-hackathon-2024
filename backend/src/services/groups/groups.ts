@@ -19,7 +19,7 @@ import { GroupsService, getOptions } from './groups.class'
 import {groupCode} from "../../hooks/group-code";
 
 export const groupsPath = 'groups'
-export const groupsMethods: Array<keyof GroupsService> = ['find', 'get', 'create', 'patch', 'remove','joinGroup']
+export const groupsMethods: Array<keyof GroupsService> = ['find', 'get', 'create', 'patch', 'remove','joinGroup','leaveGroup']
 
 export * from './groups.class'
 export * from './groups.schema'

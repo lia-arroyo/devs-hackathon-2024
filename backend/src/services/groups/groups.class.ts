@@ -38,9 +38,35 @@ export class GroupsService<ServiceParams extends Params = GroupsParams> extends 
     } catch{
       throw new Error('Error joining group')
     }
-
-
   }
+
+  async leaveGroup(data: {groupCode: string , userId: string}){
+    const groupQuery =  await this.find({query:{groupCode: data.groupCode}})
+    const group = groupQuery.data[0] as Group;
+    group.members = group.members || []
+    const index = group.members.indexOf(data.userId, 0)
+    if (index !== -1) {
+      group.members.splice(index, 1)
+    } else {
+      throw new Error('Entered user to remove was not found')
+    }
+
+    const groupId = typeof group._id === 'object' ? group._id.toString() : group._id
+
+    try{
+      return await this.patch(groupId, <GroupsPatch>{
+        name: group.name,
+        members: group.members,
+        groupType: group.groupType,
+        ownerId: group.ownerId,
+        groupCode: group.groupCode,
+        stakes: group.stakes,
+      })
+    } catch{
+      throw new Error('Error leaving group')
+    }
+  }
+
 }
 
 export const getOptions = (app: Application): MongoDBAdapterOptions => {
