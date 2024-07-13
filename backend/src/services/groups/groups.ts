@@ -16,6 +16,7 @@ import {
 
 import type { Application } from '../../declarations'
 import { GroupsService, getOptions } from './groups.class'
+import {groupCode} from "../../hooks/group-code";
 
 export const groupsPath = 'groups'
 export const groupsMethods: Array<keyof GroupsService> = ['find', 'get', 'create', 'patch', 'remove']
@@ -45,7 +46,7 @@ export const groups = (app: Application) => {
       all: [schemaHooks.validateQuery(groupsQueryValidator), schemaHooks.resolveQuery(groupsQueryResolver)],
       find: [],
       get: [],
-      create: [schemaHooks.validateData(groupsDataValidator), schemaHooks.resolveData(groupsDataResolver)],
+      create: [schemaHooks.validateData(groupsDataValidator), schemaHooks.resolveData(groupsDataResolver), groupCode],
       patch: [schemaHooks.validateData(groupsPatchValidator), schemaHooks.resolveData(groupsPatchResolver)],
       remove: []
     },
