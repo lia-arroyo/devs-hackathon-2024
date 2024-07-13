@@ -26,6 +26,16 @@ const GroupPage = () => {
   const [groupData, setGroupData] = useState({});
   const [user, setUser] = useState<any>(null);
 
+  const [visibleTextIndex, setVisibleTextIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setVisibleTextIndex((prevIndex) => (prevIndex + 1) % 3);
+    }, 5000); // 5000ms = 5 seconds
+
+    return () => clearInterval(intervalId); // Cleanup interval on component unmount
+  }, []);
+
   useEffect(() => {
     const fetchGroupData = async () => {
       const data = await featherContext?.service('groups').get(groupId as string);
@@ -46,7 +56,7 @@ const GroupPage = () => {
   useEffect(() => {
     const fetchWaterLevel = async () => {
       const user = await featherContext?.authenticate();
-      const realUpdatedUser = await featherContext?.service("users").get(user?.user._id);
+      const realUpdatedUser = await featherContext?.service('users').get(user?.user._id);
       const waterIntake = realUpdatedUser?.waterIntake;
       let percentage = '';
       if (waterIntake >= 2000) {
@@ -70,16 +80,37 @@ const GroupPage = () => {
         <Title order={2} c="navyBlue.8">
           #{groupData.groupCode}
         </Title>
-        <Text size="sm" color="navyBlue.8">
-          Stakes: {groupData.stakes ? groupData.stakes : 'No stakes.'}
-        </Text>
-        <div>
-          <Text size="md" color="navyBlue.8">
-            You are currently #1. You drank {user?.waterIntake}ml of water today.
+        <motion.div
+          key={visibleTextIndex}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <Text
+            size="md"
+            color="navyBlue.8"
+            style={{ display: visibleTextIndex === 0 ? 'block' : 'none' }}
+          >
+            Stakes: {groupData.stakes ? groupData.stakes : 'No stakes.'}
           </Text>
-        </div>
+          <Text
+            size="md"
+            color="navyBlue.8"
+            style={{ display: visibleTextIndex === 1 ? 'block' : 'none' }}
+          >
+            You are currently #1
+          </Text>
+          <Text
+            size="md"
+            color="navyBlue.8"
+            style={{ display: visibleTextIndex === 2 ? 'block' : 'none' }}
+          >
+            You drank {user?.waterIntake}ml of water today.
+          </Text>
+        </motion.div>
         <Group mt={10}>
-          <WaterEntryModal setWaterlevel={setPercentage}/>
+          <WaterEntryModal setWaterlevel={setPercentage} />
           <Button leftSection={<IconBrandTrello size={20} />} variant="gradient" size="sm">
             Leaderboard
           </Button>
