@@ -17,9 +17,28 @@ export type ClientApplication = Application<ServiceTypes, Configuration>;
 // DEFINE CUSTOM SERVICE FUNCTIONS //
 /////////////////////////////////////
 interface UserSocketService extends SocketService{}
+interface GroupSocketService extends SocketService {
+    joinGroup: (data: { userId: string; gameCode: string }) => Promise<{
+        name: string,
+        members: string[],
+        groupType: string,
+        ownerId: string,
+        groupCode: string,
+        stakes: string
+    }>;
+    leaveGroup: (data: { userId: string; gameCode: string }) => Promise<{
+        name: string,
+        members: string[],
+        groupType: string,
+        ownerId: string,
+        groupCode: string,
+        stakes: string
+    }>;
+}
 
 type ServiceTypes = {
     [API_ROUTE.usersPath]: UserSocketService;
+    [API_ROUTE.groupsPath]: GroupSocketService
 };
 /////////////////////////////////////
 
@@ -41,5 +60,9 @@ function _registerServices(
 ) {
     app.use(API_ROUTE.usersPath, socketClient.service(API_ROUTE.usersPath), {
         methods: API_ROUTE.userMethods,
+    });
+
+    app.use(API_ROUTE.groupsPath, socketClient.service(API_ROUTE.groupsPath), {
+        methods: API_ROUTE.groupMethods,
     });
 }
