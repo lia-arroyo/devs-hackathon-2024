@@ -12,12 +12,17 @@ import {
 } from '@mantine/core';
 import classes from '@/components/AuthForms/AuthForms.module.css';
 import { convertToRGBA } from '@/utils/convertToRgba';
+import {useContext} from "react";
+import {FeatherContext} from "@/api/FeatherContext";
 
 export function SignupForm() {
+    // Styling
     const theme = useMantineTheme();
     const { colors } = theme;
-
     const backgrundColor = { backgroundColor: convertToRGBA('#ffffff', 0.3) };
+
+    // Featherjs
+    const featherContext = useContext(FeatherContext);
 
     return (
         <Paper radius="lg" style={backgrundColor} className={classes.container}>
