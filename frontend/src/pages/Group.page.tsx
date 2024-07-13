@@ -1,21 +1,20 @@
 import {
   BackgroundImage,
   Button,
-  Flex,
   Group,
-  Select,
   Text,
   Title,
-  Transition,
   useMantineTheme,
 } from '@mantine/core';
 import classes from './Pages.module.css';
 import bg from '../assets/background.png';
 import { useState } from 'react';
 import { WaterEntryModal } from '@/components/WaterEntry/WaterEntryModal';
-import { IconBrandTrello, IconPlus } from '@tabler/icons-react';
-import { color, motion } from 'framer-motion';
+import { IconBrandTrello } from '@tabler/icons-react';
 import { convertToRGBA } from '@/utils/convertToRgba';
+import { motion } from "framer-motion"
+import {CheckLogin} from "@/components/CheckLogin/CheckLogin";
+
 
 const GroupPage = () => {
   const data = ["Jolin's", "Lia's"];
@@ -29,6 +28,7 @@ const GroupPage = () => {
 
   return (
     <div className={classes.pageContainer} style={{ backgroundColor: colors.skyBlue[1] }}>
+      <CheckLogin/>
       <BackgroundImage src={bg} className={classes.background}>
         <Text size="sm" color="navyBlue.8">
           Group Name
