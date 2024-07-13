@@ -5,6 +5,7 @@ import type { MongoDBAdapterParams, MongoDBAdapterOptions } from '@feathersjs/mo
 
 import type { Application } from '../../declarations'
 import type { Groups, GroupsData, GroupsPatch, GroupsQuery } from './groups.schema'
+import {Group} from "../../types";
 
 export type { Groups, GroupsData, GroupsPatch, GroupsQuery }
 
@@ -16,7 +17,31 @@ export class GroupsService<ServiceParams extends Params = GroupsParams> extends 
   GroupsData,
   GroupsParams,
   GroupsPatch
-> {}
+> {
+  async joinGroup(data: {groupCode: string , userId: string}){
+    const groupQuery =  await this.find({query:{groupCode: data.groupCode}})
+    const group = groupQuery.data[0] as Group;
+
+    group.members.push(data.userId)
+
+    const groupId = typeof group._id === 'object' ? group._id.toString() : group._id
+
+    try{
+      return await this.patch(groupId, <GroupsPatch>{
+        name: group.name,
+        members: group.members,
+        groupType: group.groupType,
+        ownerId: group.ownerId,
+        groupCode: group.groupCode,
+        stakes: group.stakes,
+      })
+    } catch{
+      throw new Error('Error joining group')
+    }
+
+
+  }
+}
 
 export const getOptions = (app: Application): MongoDBAdapterOptions => {
   return {
