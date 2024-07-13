@@ -9,8 +9,7 @@ const GroupsContainer = () => {
 
   return (
     <Container style={backgroundColor} className={classes.groupsContainer}>
-        <CheckLogin/>
-        <GroupsList />
+      <GroupsList />
       <Divider my={20} size="sm" color="navyBlue.8" />
       <JoinGroupSection />
     </Container>

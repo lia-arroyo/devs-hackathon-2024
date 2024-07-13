@@ -1,7 +1,5 @@
 import { ActionIcon, Center, Container, Group, Input, Title } from '@mantine/core';
 import { IconArrowRight } from '@tabler/icons-react';
-import { useState } from 'react';
-import { Button, Center, Container, Input, Text } from '@mantine/core';
 import {useContext, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {FeatherContext} from "@/api/FeatherContext";
@@ -46,7 +44,7 @@ const JoinGroupSection = () => {
             value={groupCode ?? ''}
             onChange={(e) => setGroupCode(e.target.value)}
           />
-          <ActionIcon variant="filled" size={36} color="skyBlue.7">
+          <ActionIcon variant="filled" size={36} color="skyBlue.7" onClick={()=> {_onJoinGroup()}}>
             <IconArrowRight />
           </ActionIcon>
         </Group>
