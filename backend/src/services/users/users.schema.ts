@@ -13,11 +13,15 @@ export const userSchema = {
   $id: 'User',
   type: 'object',
   additionalProperties: false,
-  required: ['_id', 'email'],
+  required: ['_id', 'email', 'name'],
   properties: {
     _id: ObjectIdSchema(),
     email: { type: 'string' },
-    password: { type: 'string' }
+    password: { type: 'string' },
+    name: { type: 'string' },
+    stepsTaken: { type: 'number' },
+    waterIntake: { type: 'number' },
+    groups: { type: 'array', items: { type: 'string' } }
   }
 } as const
 export type User = FromSchema<typeof userSchema>
