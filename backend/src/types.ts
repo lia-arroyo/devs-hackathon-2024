@@ -8,4 +8,14 @@ export interface Group {
     stakes: string | ''
 
 }
+
+export interface User{
+   _id: object,
+   email: string,
+   name:string,
+   stepsTaken: number,
+   waterIntake: number,
+   groups: string[]
+}
 export type GroupsPatch = Partial<Group>;
+export type UserPatch = Partial<User>;

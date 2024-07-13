@@ -5,7 +5,8 @@ import type { MongoDBAdapterParams, MongoDBAdapterOptions } from '@feathersjs/mo
 
 import type { Application } from '../../declarations'
 import type { Groups, GroupsData, GroupsPatch, GroupsQuery } from './groups.schema'
-import {Group} from "../../types";
+import {Group, User} from "../../types";
+import {UserPatch, UserService} from "../users/users.class";
 
 export type { Groups, GroupsData, GroupsPatch, GroupsQuery }
 
@@ -18,14 +19,22 @@ export class GroupsService<ServiceParams extends Params = GroupsParams> extends 
   GroupsParams,
   GroupsPatch
 > {
+  app: Application;
+
+  constructor(options: MongoDBAdapterOptions, app: Application) {
+    super(options);
+    this.app = app;
+  }
   async joinGroup(data: {groupCode: string , userId: string}){
     const groupQuery =  await this.find({query:{groupCode: data.groupCode}})
     const group = groupQuery.data[0] as Group;
     group.members = group.members || []
     group.members.push(data.userId)
-
     const groupId = typeof group._id === 'object' ? group._id.toString() : group._id
 
+   const result= await this.app.service('users').addGroupToUser({
+      groupId: groupId,
+     userId: data.userId})
     try{
       return await this.patch(groupId, <GroupsPatch>{
         name: group.name,
@@ -50,9 +59,10 @@ export class GroupsService<ServiceParams extends Params = GroupsParams> extends 
     } else {
       throw new Error('Entered user to remove was not found')
     }
-
     const groupId = typeof group._id === 'object' ? group._id.toString() : group._id
-
+    const result= await this.app.service('users').removeGroupFromUser({
+      groupId: groupId,
+      userId: data.userId})
     try{
       return await this.patch(groupId, <GroupsPatch>{
         name: group.name,
@@ -65,6 +75,27 @@ export class GroupsService<ServiceParams extends Params = GroupsParams> extends 
     } catch{
       throw new Error('Error leaving group')
     }
+  }
+
+  async leaderboard(data:{groupCode:string}){
+    const waterIntakes = []
+    const groupQuery =  await this.find({query:{groupCode: data.groupCode}})
+    const group = groupQuery.data[0] as Group;
+    group.members = group.members || []
+
+    for(let member of group.members){
+       const { _id, name, waterIntake } = await this.app.service('users').get(member)
+waterIntakes.push({userId: _id.toString(), name, waterIntake})
+
+    }
+    waterIntakes.sort((a, b) => {
+      // Handle cases where waterIntake might be undefined
+      const waterIntakeA = a.waterIntake !== undefined ? a.waterIntake : 0;
+      const waterIntakeB = b.waterIntake !== undefined ? b.waterIntake : 0;
+
+      return waterIntakeB - waterIntakeA;
+    });
+return waterIntakes
   }
 
 }
