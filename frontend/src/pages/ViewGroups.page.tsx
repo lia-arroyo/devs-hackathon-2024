@@ -1,16 +1,14 @@
 import BubblyBackground from '@/components/BubbleBackground/BubbleBackground';
 import classes from './Pages.module.css';
 import GroupsContainer from '@/components/GroupsContainer/GroupsContainer';
-import {CheckLogin} from "@/components/CheckLogin/CheckLogin";
-import {SignoutButton} from "@/components/SignoutButton/SignoutButton";
+import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
 
 const ViewGroupsPage = () => {
   return (
     <div className={classes.pageContainer}>
-      <CheckLogin/>
+      <CheckLogin />
       <BubblyBackground />
       <GroupsContainer />
-      <SignoutButton/>
     </div>
   );
 };
