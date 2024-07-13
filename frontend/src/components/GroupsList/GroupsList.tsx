@@ -24,6 +24,10 @@ const GroupsList = () => {
     return data;
   };
 
+  const handleGroupClick = (groupData) => {
+    navigate(`/group/${groupData._id}`);
+  };
+
   useEffect(() => {
     fetchCurrentUser();
   }, []);
@@ -60,7 +64,15 @@ const GroupsList = () => {
       </Title>
       <div className={classes.groupList}>
         {groups.map((group) => (
-          <Button variant="outline" fullWidth className={classes.listItem} size="md">
+          <Button
+            variant="outline"
+            fullWidth
+            className={classes.listItem}
+            size="md"
+            onClick={() => {
+              handleGroupClick(group);
+            }}
+          >
             {group.name}
           </Button>
         ))}

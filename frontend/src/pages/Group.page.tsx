@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
 import { FeatherContext } from '@/api/FeatherContext';
 import { l } from 'vite/dist/node/types.d-aGj9QkWt';
+import { useParams } from 'react-router-dom';
 
 const GroupPage = () => {
   const data = ["Jolin's", "Lia's"];
@@ -20,6 +21,27 @@ const GroupPage = () => {
 
   const [percentage, setPercentage] = useState('100%');
   const featherContext = useContext(FeatherContext);
+
+  const { id: groupId } = useParams();
+  const [groupData, setGroupData] = useState({});
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchGroupData = async () => {
+      const data = await featherContext?.service('groups').get(groupId as string);
+      setGroupData(data);
+    };
+
+    const fetchCurrentUser = async () => {
+      const user = await featherContext?.authenticate();
+      if (user) {
+        setUser(user.user);
+      }
+    };
+
+    fetchGroupData();
+    fetchCurrentUser();
+  }, []);
 
   useEffect(() => {
     const fetchWaterLevel = async () => {
@@ -44,14 +66,17 @@ const GroupPage = () => {
       <CheckLogin />
       <BackgroundImage src={bg} className={classes.background}>
         <Text size="sm" color="navyBlue.8">
-          Group Name
+          {groupData.name}
         </Text>
         <Title order={2} c="navyBlue.8">
-          #321543
+          #{groupData.groupCode}
         </Title>
+        <Text size="sm" color="navyBlue.8">
+          Stakes: {groupData.stakes ? groupData.stakes : 'No stakes.'}
+        </Text>
         <div>
           <Text size="md" color="navyBlue.8">
-            You are currently #1
+            You are currently #1. You drank {user?.waterIntake}ml of water today.
           </Text>
         </div>
         <Group mt={10}>
