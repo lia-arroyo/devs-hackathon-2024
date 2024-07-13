@@ -10,5 +10,26 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb+srv://shlay:AWDjE2uVbCyWhAUu@cluster0.q3istrl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  "mongodb": "mongodb+srv://shlay:AWDjE2uVbCyWhAUu@cluster0.q3istrl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "KO7iFSD81ePdy3czVX/LKL9oivX6vBjS",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  }
 }
