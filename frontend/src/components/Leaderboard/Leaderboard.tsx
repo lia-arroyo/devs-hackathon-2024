@@ -98,7 +98,7 @@ export function Leaderboard() {
 
   return (
     <ScrollArea h={300} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
-      <Table miw={700} striped>
+      <Table miw={rem(300)} striped>
         <Table.Thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
           <Table.Tr>
             <Table.Th>Position</Table.Th>
