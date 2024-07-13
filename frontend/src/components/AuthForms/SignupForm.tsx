@@ -71,7 +71,7 @@ export function SignupForm() {
                     required
                     mt="md"
                 />
-                <Button fullWidth mt="xl">
+                <Button fullWidth mt="xl" onClick={()=>{_onSignUp()}}>
                     Create account
                 </Button>
                 <Text c="dimmed" size="sm" ta="center" mt={5}>
