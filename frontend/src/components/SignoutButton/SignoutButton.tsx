@@ -1,4 +1,4 @@
-import { ActionIcon, Button, useMantineTheme } from '@mantine/core';
+import { ActionIcon, Button, HoverCard, Text, useMantineTheme } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { FeatherContext } from '@/api/FeatherContext';
@@ -20,8 +20,15 @@ export function SignoutButton() {
   }
 
   return (
-    <ActionIcon onClick={_onSignout} variant="transparent" size="lg">
-      <IconLogout style={{ width: '128px', height: '128px' }} color={colors.navyBlue[9]} />
-    </ActionIcon>
+    <HoverCard>
+      <HoverCard.Target>
+        <ActionIcon onClick={_onSignout} variant="transparent" size="lg">
+          <IconLogout style={{ width: '128px', height: '128px' }} color={colors.navyBlue[9]} />
+        </ActionIcon>
+      </HoverCard.Target>
+      <HoverCard.Dropdown>
+        <Text>Logout</Text>
+      </HoverCard.Dropdown>
+    </HoverCard>
   );
 }

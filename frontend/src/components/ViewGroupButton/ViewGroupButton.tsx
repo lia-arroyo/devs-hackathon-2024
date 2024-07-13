@@ -1,4 +1,4 @@
-import { ActionIcon, useMantineTheme } from '@mantine/core';
+import { ActionIcon, HoverCard, Text, useMantineTheme } from '@mantine/core';
 import { IconUsersGroup } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,15 +7,22 @@ const ViewGroupButton = () => {
   const theme = useMantineTheme();
   const { colors } = theme;
   return (
-    <ActionIcon
-      onClick={() => {
-        navigate('/');
-      }}
-      variant="transparent"
-      size="lg"
-    >
-      <IconUsersGroup style={{ width: '128px', height: '128px' }} color={colors.navyBlue[9]} />
-    </ActionIcon>
+    <HoverCard>
+      <HoverCard.Target>
+        <ActionIcon
+          onClick={() => {
+            navigate('/');
+          }}
+          variant="transparent"
+          size="lg"
+        >
+          <IconUsersGroup style={{ width: '128px', height: '128px' }} color={colors.navyBlue[9]} />
+        </ActionIcon>
+      </HoverCard.Target>
+      <HoverCard.Dropdown>
+        <Text>View your groups</Text>
+      </HoverCard.Dropdown>
+    </HoverCard>
   );
 };
 
