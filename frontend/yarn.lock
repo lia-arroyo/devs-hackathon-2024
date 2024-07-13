@@ -2622,15 +2622,15 @@ browserslist@^4.23.0, browserslist@^4.23.1, "browserslist@>= 4.21.0":
     node-releases "^2.0.14"
     update-browserslist-db "^1.1.0"
 
-buffer-equal-constant-time@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz"
-  integrity sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==
-
 bubbly-bg@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/bubbly-bg/-/bubbly-bg-1.0.0.tgz"
   integrity sha512-sqTWKaeRjWywlXzDEL12z2lxhjG/hPK/0uWkl59hBSIdsA1y3GPRLHfkTelcufY0tQVtXCqKYQDvlW1XHNw53A==
+
+buffer-equal-constant-time@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz"
+  integrity sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==
 
 buffer-from@^1.0.0:
   version "1.1.2"

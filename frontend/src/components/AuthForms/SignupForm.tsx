@@ -8,14 +8,14 @@ import {
     Text,
     TextInput,
     Title,
-    useMantineTheme
-} from "@mantine/core";
-import classes from "@/components/AuthForms/AuthForms.module.css";
-import {convertToRGBA} from "@/utils/convertToRgba";
+    useMantineTheme,
+} from '@mantine/core';
+import classes from '@/components/AuthForms/AuthForms.module.css';
+import { convertToRGBA } from '@/utils/convertToRgba';
 
 export function SignupForm() {
     const theme = useMantineTheme();
-    const {colors} = theme;
+    const { colors } = theme;
 
     const backgrundColor = { backgroundColor: convertToRGBA('#ffffff', 0.3) };
 
@@ -39,5 +39,5 @@ export function SignupForm() {
                 </Text>
             </Paper>
         </Paper>
-    )
+    );
 }

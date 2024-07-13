@@ -17,7 +17,9 @@ export type ClientApplication = Application<ServiceTypes, Configuration>;
 // DEFINE CUSTOM SERVICE FUNCTIONS //
 /////////////////////////////////////
 
-type ServiceTypes = {};
+type ServiceTypes = {
+    [API_ROUTE.usersPath]: SocketService;
+};
 /////////////////////////////////////
 
 export const useFeathers = () => {
@@ -36,4 +38,7 @@ function _registerServices(
     app: ClientApplication,
     socketClient: TransportConnection<ServiceTypes>
 ) {
+    app.use(API_ROUTE.usersPath, socketClient.service(API_ROUTE.usersPath), {
+        methods: API_ROUTE.userMethods,
+    });
 }
