@@ -1,21 +1,47 @@
-import {BackgroundImage, Button, Flex, Group, Select, Text, Title, Transition} from '@mantine/core';
+import { BackgroundImage, Button, Group, Text, Title, useMantineTheme } from '@mantine/core';
 import classes from './Pages.module.css';
 import bg from '../assets/background.png';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { WaterEntryModal } from '@/components/WaterEntry/WaterEntryModal';
-import { IconBrandTrello, IconPlus } from '@tabler/icons-react';
-import { motion } from "framer-motion"
-import {CheckLogin} from "@/components/CheckLogin/CheckLogin";
+import { IconBrandTrello } from '@tabler/icons-react';
+import { convertToRGBA } from '@/utils/convertToRgba';
+import { motion } from 'framer-motion';
+import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
+import { FeatherContext } from '@/api/FeatherContext';
+import { l } from 'vite/dist/node/types.d-aGj9QkWt';
 
 const GroupPage = () => {
   const data = ["Jolin's", "Lia's"];
   const [value, setValue] = useState<string | string>();
 
+  const theme = useMantineTheme();
+  const { colors } = theme;
+  const waterColor = { backgroundColor: convertToRGBA(colors.skyBlue[9], 0.8) };
+
   const [percentage, setPercentage] = useState('100%');
+  const featherContext = useContext(FeatherContext);
+
+  useEffect(() => {
+    const fetchWaterLevel = async () => {
+      const user = await featherContext?.authenticate();
+      const waterIntake = user?.user.waterIntake;
+      console.log(waterIntake);
+      let percentage = '';
+      if (waterIntake >= 2000) {
+        percentage = '100%';
+      } else {
+        percentage = `${waterIntake / 2000}%`;
+      }
+      console.log(percentage);
+      setPercentage(percentage);
+    };
+
+    fetchWaterLevel();
+  }, [featherContext]);
 
   return (
-    <div className={classes.pageContainer}>
-      <CheckLogin/>
+    <div className={classes.pageContainer} style={{ backgroundColor: colors.skyBlue[1] }}>
+      <CheckLogin />
       <BackgroundImage src={bg} className={classes.background}>
         <Text size="sm" color="navyBlue.8">
           Group Name
@@ -33,30 +59,16 @@ const GroupPage = () => {
           <Button leftSection={<IconBrandTrello size={20} />} variant="gradient" size="sm">
             Leaderboard
           </Button>
-          <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
-            setPercentage('0%')
-          }}>
-            100
-          </Button>
-          <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
-            setPercentage('50%')
-          }}>
-            50
-          </Button>
-          <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
-            setPercentage('100%')
-          }}>
-            0
-          </Button>
         </Group>
         <div className={classes.waveContainer}>
           <motion.div
-              className={classes.pageContainer}
-              initial={{y: 0}}  // Initial position based on yPos
-              animate={{y: percentage, opacity: 1}}  // Animation when component loads or yPos changes
-              transition={{ type: 'spring', damping: 6, stiffness: 20, duration: 4 }}
+            style={waterColor}
+            className={classes.pageContainer}
+            initial={{ y: 0 }} // Initial position based on yPos
+            animate={{ y: percentage, opacity: 1 }} // Animation when component loads or yPos changes
+            transition={{ type: 'spring', damping: 6, stiffness: 20, duration: 4 }}
           >
-            <div className={classes.waveBackground}/>
+            <div className={classes.waveBackground} />
           </motion.div>
         </div>
       </BackgroundImage>
