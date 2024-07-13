@@ -2,14 +2,16 @@ import { Container, Divider } from '@mantine/core';
 import GroupsList from '../GroupsList/GroupsList';
 import JoinGroupSection from '../JoinGroupSection/JoinGroupSection';
 import classes from './GroupsContainer.module.css';
-import {CheckLogin} from "@/components/CheckLogin/CheckLogin";
+import { convertToRGBA } from '@/utils/convertToRgba';
 
 const GroupsContainer = () => {
+  const backgroundColor = { backgroundColor: convertToRGBA('#ffffff', 0.4) };
+
   return (
-    <Container className={classes.groupsContainer}>
+    <Container style={backgroundColor} className={classes.groupsContainer}>
         <CheckLogin/>
-      <GroupsList />
-      <Divider my="md" size="sm" color="navyBlue.6" />
+        <GroupsList />
+      <Divider my={20} size="sm" color="navyBlue.8" />
       <JoinGroupSection />
     </Container>
   );

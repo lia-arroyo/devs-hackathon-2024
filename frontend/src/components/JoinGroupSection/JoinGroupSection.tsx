@@ -1,3 +1,6 @@
+import { ActionIcon, Center, Container, Group, Input, Title } from '@mantine/core';
+import { IconArrowRight } from '@tabler/icons-react';
+import { useState } from 'react';
 import { Button, Center, Container, Input, Text } from '@mantine/core';
 import {useContext, useState} from 'react';
 import {useNavigate} from "react-router-dom";
@@ -5,7 +8,7 @@ import {FeatherContext} from "@/api/FeatherContext";
 import {CheckLogin} from "@/components/CheckLogin/CheckLogin";
 
 const JoinGroupSection = () => {
-  const [groupCode, setGroupCode] = useState<String>();
+  const [groupCode, setGroupCode] = useState<string>();
   const navigate = useNavigate();
   const featherContext = useContext(FeatherContext);
   const placeholderText = 'Enter group code here';
@@ -31,17 +34,22 @@ const JoinGroupSection = () => {
 
   return (
     <Container style={{ margin: 0, padding: 0 }}>
-      <Text size="xl" ta="center">
+      <Title order={4} ta="center" my={6} c="navyBlue.9">
         Join Group
-      </Text>
+      </Title>
       <Center>
-        <Input
-          type="Number"
-          placeholder={placeholderText}
-          value={groupCode ?? ''}
-          onChange={(e) => setGroupCode(e.target.value)}
-        />
-        <Button variant="filled" onClick={()=>{_onJoinGroup()}}>Join</Button>
+        <Group>
+          <Input
+            type="number"
+            variant="filled"
+            placeholder={placeholderText}
+            value={groupCode ?? ''}
+            onChange={(e) => setGroupCode(e.target.value)}
+          />
+          <ActionIcon variant="filled" size={36} color="skyBlue.7">
+            <IconArrowRight />
+          </ActionIcon>
+        </Group>
       </Center>
     </Container>
   );
