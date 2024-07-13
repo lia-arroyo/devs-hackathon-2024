@@ -6,6 +6,7 @@ import { IconBrandTrello } from '@tabler/icons-react';
 export function LeaderboardModal() {
   const [opened, { open, close }] = useDisclosure(false);
   const groupCode: string = '49167101';
+  console.log('GROUP CODE IS HARDCODED!!!!!! TO ' + groupCode);
 
   return (
     <>
