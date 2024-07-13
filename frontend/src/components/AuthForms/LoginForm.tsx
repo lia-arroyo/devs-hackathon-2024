@@ -9,25 +9,23 @@ import {
   Container,
   Group,
   Button,
-  useMantineTheme, em,
+  useMantineTheme,
+  em,
 } from '@mantine/core';
 import classes from './AuthForms.module.css';
 import { convertToRGBA } from '@/utils/convertToRgba';
-import {FeatherContext} from "@/api/FeatherContext";
-import {useContext, useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { FeatherContext } from '@/api/FeatherContext';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function LoginForm() {
-  const theme = useMantineTheme();
-  const { colors } = theme;
-  const backgrundColor = { backgroundColor: convertToRGBA('#ffffff', 0.3) };
+  const backgroundColor = { backgroundColor: convertToRGBA('#ffffff', 0.3) };
 
   // Featherjs
   const navigate = useNavigate();
   const featherContext = useContext(FeatherContext);
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -48,31 +46,31 @@ export function LoginForm() {
       });
       navigate('/');
     } catch {
-      console.log("OH NOO, wrong password")
+      console.log('OH NOO, wrong password');
     }
-
   }
 
   return (
-    <Paper radius="lg" style={backgrundColor} className={classes.container}>
+    <Paper radius="lg" style={backgroundColor} className={classes.container}>
       <Title ta="center" className={classes.title}>
         Welcome back!
       </Title>
 
       <Paper p={30} mt={30} className={classes.form}>
         <TextInput
-            label="Email"
-            placeholder="you@mantine.dev"
-            value={email}
-            onChange={(event) => setEmail(event.currentTarget.value)}
-            required
+          label="Email"
+          placeholder="you@mantine.dev"
+          value={email}
+          onChange={(event) => setEmail(event.currentTarget.value)}
+          required
         />
         <PasswordInput
-            label="Password"
-            placeholder="Your password"
-            value={password}
-            required mt="md"
-            onChange={(event) => setPassword(event.currentTarget.value)}
+          label="Password"
+          placeholder="Your password"
+          value={password}
+          required
+          mt="md"
+          onChange={(event) => setPassword(event.currentTarget.value)}
         />
         <Group justify="space-between" mt="lg">
           <Checkbox label="Remember me" />
@@ -80,7 +78,13 @@ export function LoginForm() {
             Forgot password?
           </Anchor>
         </Group>
-        <Button fullWidth mt="xl" onClick={() => {_onSignin()}}>
+        <Button
+          fullWidth
+          mt="xl"
+          onClick={() => {
+            _onSignin();
+          }}
+        >
           Sign in
         </Button>
         <Text c="dimmed" size="sm" ta="center" mt={5}>
