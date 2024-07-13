@@ -48,7 +48,8 @@ export function CreateGroupForm() {
             name: groupName,
             groupType: accountabilityType,
             ownerId: user?.user._id,
-            stakes: stake
+            stakes: stake,
+            members: [user?.user._id]
         })
         navigate('/groups');
     } catch {
