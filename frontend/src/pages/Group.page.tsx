@@ -9,7 +9,7 @@ const GroupPage = () => {
   const data = ["Jolin's", "Lia's"];
   const [value, setValue] = useState<string | string>();
 
-  const [percentage, setPercentage] = useState(0);
+  const [percentage, setPercentage] = useState('100%');
 
   return (
     <div className={classes.pageContainer}>
@@ -34,17 +34,17 @@ const GroupPage = () => {
             Leaderboard
           </Button>
           <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
-            setPercentage(500)
+            setPercentage('0%')
           }}>
             100
           </Button>
           <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
-            setPercentage(50)
+            setPercentage('50%')
           }}>
             50
           </Button>
           <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
-            setPercentage(0)
+            setPercentage('100%')
           }}>
             0
           </Button>
