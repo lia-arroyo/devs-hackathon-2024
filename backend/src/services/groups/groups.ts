@@ -27,7 +27,7 @@ export * from './groups.schema'
 // A configure function that registers the service and its hooks via `app.configure`
 export const groups = (app: Application) => {
   // Register our service on the Feathers application
-  app.use(groupsPath, new GroupsService(getOptions(app)), {
+  app.use(groupsPath, new GroupsService(getOptions(app),app), {
     // A list of all methods this service exposes externally
     methods: groupsMethods,
     // You can add additional custom events to be sent to clients here
