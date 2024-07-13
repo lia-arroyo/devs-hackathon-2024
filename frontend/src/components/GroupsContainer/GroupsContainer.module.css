@@ -2,4 +2,11 @@
   background-color: var(--mantine-color-skyBlue-1);
   padding: 2% 6%;
   border-radius: 2%;
+  height: 80%;
+  width: 50%;
+  max-width: 800px;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

@@ -18,6 +18,7 @@ import { convertToRGBA } from '@/utils/convertToRgba';
 import { useContext, useState } from 'react';
 import { FeatherContext } from '@/api/FeatherContext';
 import { useNavigate } from 'react-router-dom';
+import { identity } from '@mantine/core/lib/core/factory/factory';
 
 export function CreateGroupForm() {
   // Styling
@@ -31,7 +32,7 @@ export function CreateGroupForm() {
   const [groupName, setGroupName] = useState('');
   const [accountabilityType, setAccountabilityType] = useState<string | null>('');
   const [stake, setStake] = useState('');
-
+  
   // data
   const accountabilityData = [
     { value: 'water', label: 'Water Drinking' },
@@ -39,6 +40,22 @@ export function CreateGroupForm() {
     { value: 'gym', label: 'Gym', disabled: true },
     { value: 'meditation', label: 'Meditation', disabled: true },
   ];
+
+  async function _onCreateGroup() {
+    try {
+        const user = await featherContext?.authenticate();
+        await featherContext?.service('groups').create({
+            name: groupName,
+            groupType: accountabilityType,
+            ownerId: user?.user._id,
+            stakes: stake,
+            members: [user?.user._id]
+        })
+        navigate('/groups');
+    } catch {
+        console.log("Error creating");
+    }
+}
 
   return (
     <Paper radius="lg" style={backgrundColor} className={classes.container}>
@@ -71,7 +88,7 @@ export function CreateGroupForm() {
               onChange={(event) => setStake(event.currentTarget.value)}
             />
           </Flex>
-          <Button fullWidth mt="xl">
+          <Button fullWidth mt="xl" onClick={() =>{_onCreateGroup()}}>
             Create Group
           </Button>
         </Flex>
