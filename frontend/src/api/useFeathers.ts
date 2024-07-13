@@ -18,7 +18,7 @@ export type ClientApplication = Application<ServiceTypes, Configuration>;
 /////////////////////////////////////
 interface UserSocketService extends SocketService{}
 interface GroupSocketService extends SocketService {
-    joinGroup: (data: { userId: string; gameCode: string }) => Promise<{
+    joinGroup: (data: { userId: string; groupCode: string }) => Promise<{
         name: string,
         members: string[],
         groupType: string,
@@ -26,7 +26,7 @@ interface GroupSocketService extends SocketService {
         groupCode: string,
         stakes: string
     }>;
-    leaveGroup: (data: { userId: string; gameCode: string }) => Promise<{
+    leaveGroup: (data: { userId: string; groupCode: string }) => Promise<{
         name: string,
         members: string[],
         groupType: string,
