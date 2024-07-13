@@ -5,7 +5,7 @@ const JoinGroupSection = () => {
   const [groupCode, setGroupCode] = useState<String>();
   const placeholderText = 'Enter group code here';
   return (
-    <Container>
+    <Container style={{ margin: 0, padding: 0 }}>
       <Text size="xl" ta="center">
         Join Group
       </Text>

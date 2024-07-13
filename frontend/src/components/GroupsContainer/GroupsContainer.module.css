@@ -1,0 +1,5 @@
+.groupsContainer {
+  background-color: var(--mantine-color-skyBlue-1);
+  padding: 2% 6%;
+  border-radius: 2%;
+}
