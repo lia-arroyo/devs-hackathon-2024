@@ -24,15 +24,14 @@ const GroupPage = () => {
   useEffect(() => {
     const fetchWaterLevel = async () => {
       const user = await featherContext?.authenticate();
-      const waterIntake = user?.user.waterIntake;
-      console.log(waterIntake);
+      const realUpdatedUser = await featherContext?.service("users").get(user?.user._id);
+      const waterIntake = realUpdatedUser?.waterIntake;
       let percentage = '';
       if (waterIntake >= 2000) {
         percentage = '100%';
       } else {
-        percentage = `${waterIntake / 2000}%`;
+        percentage = `${(waterIntake / 2000) * 100}%`;
       }
-      console.log(percentage);
       setPercentage(percentage);
     };
 
@@ -55,7 +54,7 @@ const GroupPage = () => {
           </Text>
         </div>
         <Group mt={10}>
-          <WaterEntryModal />
+          <WaterEntryModal setWaterlevel={setPercentage}/>
           <Button leftSection={<IconBrandTrello size={20} />} variant="gradient" size="sm">
             Leaderboard
           </Button>

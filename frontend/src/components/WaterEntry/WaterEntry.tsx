@@ -16,11 +16,20 @@ import {
   IconAdjustments,
 } from '@tabler/icons-react';
 import { IconBottle, IconBucket } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { FeatherContext } from '@/api/FeatherContext';
+import { useNavigate } from 'react-router-dom';
 
-export function WaterEntry() {
+interface Iprops{
+  setWaterlevel: any
+  closeModal: () => void
+}
+
+// setWaterlevel('50%')
+export function WaterEntry(props: Iprops) {
   const [amountDrank, setAmountDrank] = useState(0);
   const [drinkIcon, setDrinkIcon] = useState(<IconDropletFilled style={styles.droplet} />);
+  const [selectedAmount, setSelectedAmount] = useState('250ml');
   const headerButtonLabels = [
     {
       value: '250ml',
@@ -43,7 +52,8 @@ export function WaterEntry() {
   ];
 
   const handleDrinkUp = () => {
-    setAmountDrank(amountDrank + 1);
+    const increment = selectedAmount === '250ml' ? 250 : 500;
+    setAmountDrank(amountDrank + increment);
 
     // change icon to full droplet
     setDrinkIcon(<IconDroplet style={styles.droplet} />);
@@ -60,7 +70,8 @@ export function WaterEntry() {
   };
 
   const handleDrinkDown = () => {
-    setAmountDrank(amountDrank - 1);
+    const increment = selectedAmount === '250ml' ? 250 : 500;
+    setAmountDrank(amountDrank - increment);
 
     // wait 0.5 second
     setTimeout(() => {
@@ -78,10 +89,38 @@ export function WaterEntry() {
     }, 1500);
   };
 
+  const featherContext = useContext(FeatherContext);
+  async function _updateWaterIntake() {
+    try {
+      const user = await featherContext?.authenticate();
+      const realUpdatedUser = await featherContext?.service("users").get(user?.user._id);
+      const newWater = amountDrank + realUpdatedUser?.waterIntake;
+      const updatedUser = await featherContext?.service('users').patch(user?.user._id, {
+        waterIntake: newWater,
+      });
+      let percentage = '';
+      const waterIntake = updatedUser?.waterIntake;
+      props.closeModal();
+      if (waterIntake >= 2000) {
+        percentage = '100%';
+      } else {
+        percentage = `${(waterIntake / 2000) * 100}%`;
+      }
+      props.setWaterlevel(percentage);
+    } catch {
+      console.log('Error updating water intake');
+    }
+  }
   return (
     <div>
       <Flex mih={rem(250)} direction="column" justify="space-between" align="center">
-        <SegmentedControl radius="xl" size="md" classNames={classes} data={headerButtonLabels} />
+        <SegmentedControl 
+        radius="xl" 
+        size="md" 
+        classNames={classes} 
+        data={headerButtonLabels} 
+        onChange={(value) => setSelectedAmount(value)}
+        />
         <Center>
           <Text size={rem(32)}>{amountDrank}</Text>
           {drinkIcon}
@@ -113,7 +152,7 @@ export function WaterEntry() {
             +
           </ActionIcon>
         </Center>
-        <Button>Confirm</Button>
+        <Button onClick={() =>{_updateWaterIntake()}}>Confirm</Button>
       </Flex>
     </div>
   );
