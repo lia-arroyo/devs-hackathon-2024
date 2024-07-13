@@ -10,5 +10,5 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://127.0.0.1:27017/slay"
+  "mongodb": "mongodb+srv://shlay:AWDjE2uVbCyWhAUu@cluster0.q3istrl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 }
