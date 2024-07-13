@@ -1,0 +1,11 @@
+.groupsContainer {
+  padding: 0%;
+  margin: 0%;
+}
+
+.group {
+  background-color: brown;
+  border: solid 1px black;
+  border-radius: 5%;
+  margin-bottom: 5%;
+}

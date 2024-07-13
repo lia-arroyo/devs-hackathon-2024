@@ -4,6 +4,7 @@ import LoginPage from './pages/Login.page';
 import SignupPage from './pages/Signup.page';
 import CreateGroupPage from './pages/CreateGroup.page';
 import GroupPage from './pages/Group.page';
+import ViewGroupsPage from './pages/ViewGroups.page';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/group',
     element: <GroupPage />,
+  },
+  {
+    path: '/groups',
+    element: <ViewGroupsPage />,
   },
 ]);
 
