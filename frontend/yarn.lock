@@ -1700,6 +1700,18 @@
   resolved "https://registry.npmjs.org/@storybook/theming/-/theming-8.2.2.tgz"
   integrity sha512-byjEORePZyUDsGuGlZ8qamZPXmkM6rNMWaMaTxsp7XaQJc7J6fcb9n96R3JjU0vzqS8QpsxJSS+VJ2ur2zS7Sw==
 
+"@tabler/icons-react@^3.10.0":
+  version "3.10.0"
+  resolved "https://registry.npmjs.org/@tabler/icons-react/-/icons-react-3.10.0.tgz"
+  integrity sha512-FTES0wJLIV+M9Ggng0j/6Kn/j43ZuBukR5n6DNV8Npk4woPCDcRjA+2KzKQyvSdwtPMAM6o1e8fQBPDS337Spg==
+  dependencies:
+    "@tabler/icons" "3.10.0"
+
+"@tabler/icons@3.10.0":
+  version "3.10.0"
+  resolved "https://registry.npmjs.org/@tabler/icons/-/icons-3.10.0.tgz"
+  integrity sha512-jCMO+hDTw8Gn1CNb15zIENLQ9b0UplGXtjMnEUhDoKH+Q4fta8tBLUxZpPpFtpV+q+gzGqfM76xNAoD1GBpmnA==
+
 "@testing-library/dom@^10.0.0", "@testing-library/dom@^10.1.0", "@testing-library/dom@>=7.21.4":
   version "10.3.1"
   resolved "https://registry.npmjs.org/@testing-library/dom/-/dom-10.3.1.tgz"
@@ -2622,15 +2634,15 @@ browserslist@^4.23.0, browserslist@^4.23.1, "browserslist@>= 4.21.0":
     node-releases "^2.0.14"
     update-browserslist-db "^1.1.0"
 
-buffer-equal-constant-time@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz"
-  integrity sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==
-
 bubbly-bg@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/bubbly-bg/-/bubbly-bg-1.0.0.tgz"
   integrity sha512-sqTWKaeRjWywlXzDEL12z2lxhjG/hPK/0uWkl59hBSIdsA1y3GPRLHfkTelcufY0tQVtXCqKYQDvlW1XHNw53A==
+
+buffer-equal-constant-time@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz"
+  integrity sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==
 
 buffer-from@^1.0.0:
   version "1.1.2"
@@ -5916,7 +5928,7 @@ react-textarea-autosize@8.5.3:
     use-composed-ref "^1.3.0"
     use-latest "^1.2.1"
 
-"react@^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta", react@^18.0.0, react@^18.2.0, react@^18.3.1, "react@>= 0.14.0", react@>=16, react@>=16.8, react@>=16.8.0:
+"react@^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta", react@^18.0.0, react@^18.2.0, react@^18.3.1, "react@>= 0.14.0", "react@>= 16", react@>=16, react@>=16.8, react@>=16.8.0:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==

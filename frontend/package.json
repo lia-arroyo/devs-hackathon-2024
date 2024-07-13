@@ -24,6 +24,7 @@
     "@feathersjs/socketio-client": "^5.0.29",
     "@mantine/core": "^7.11.1",
     "@mantine/hooks": "^7.11.1",
+    "@tabler/icons-react": "^3.10.0",
     "bubbly-bg": "^1.0.0",
     "framer-motion": "^11.3.2",
     "react": "^18.3.1",
