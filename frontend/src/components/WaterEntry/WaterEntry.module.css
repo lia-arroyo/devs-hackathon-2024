@@ -6,9 +6,9 @@
 
 .indicator {
   background-image: linear-gradient(
-    to right,
-    var(--mantine-color-pink-filled),
-    var(--mantine-color-orange-filled)
+    45deg,
+    var(--mantine-color-blue-filled) 0%,
+    var(--mantine-color-cyan-filled) 100%
   );
 }
 
