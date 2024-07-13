@@ -77,6 +77,27 @@ export class GroupsService<ServiceParams extends Params = GroupsParams> extends 
     }
   }
 
+  async leaderboard(data:{groupCode:string}){
+    const waterIntakes = []
+    const groupQuery =  await this.find({query:{groupCode: data.groupCode}})
+    const group = groupQuery.data[0] as Group;
+    group.members = group.members || []
+
+    for(let member of group.members){
+       const { _id, name, waterIntake } = await this.app.service('users').get(member)
+waterIntakes.push({userId: _id.toString(), name, waterIntake})
+
+    }
+    waterIntakes.sort((a, b) => {
+      // Handle cases where waterIntake might be undefined
+      const waterIntakeA = a.waterIntake !== undefined ? a.waterIntake : 0;
+      const waterIntakeB = b.waterIntake !== undefined ? b.waterIntake : 0;
+
+      return waterIntakeA - waterIntakeB;
+    });
+return waterIntakes
+  }
+
 }
 
 export const getOptions = (app: Application): MongoDBAdapterOptions => {
