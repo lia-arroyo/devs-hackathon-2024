@@ -13,7 +13,7 @@ export const userSchema = {
   $id: 'User',
   type: 'object',
   additionalProperties: false,
-  required: ['_id', 'email', 'name'],
+  required: ['_id', 'email'],
   properties: {
     _id: ObjectIdSchema(),
     email: { type: 'string' },
@@ -38,7 +38,7 @@ export const userDataSchema = {
   $id: 'UserData',
   type: 'object',
   additionalProperties: false,
-  required: ['email'],
+  required: ['email', 'name', 'password'],
   properties: {
     ...userSchema.properties
   }
