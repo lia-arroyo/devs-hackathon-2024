@@ -11,10 +11,6 @@ const GroupPage = () => {
 
   const [percentage, setPercentage] = useState(0);
 
-  function setPercentagePosition(percentage: number) {
-
-  }
-
   return (
     <div className={classes.pageContainer}>
 
