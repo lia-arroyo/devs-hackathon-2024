@@ -2,6 +2,7 @@ import {BackgroundImage, Button, Flex, Group, Select, Text, Title, Transition} f
 import classes from './Pages.module.css';
 import bg from '../assets/background.png';
 import { useState } from 'react';
+import { WaterEntryModal } from '@/components/WaterEntry/WaterEntryModal';
 import { IconBrandTrello, IconPlus } from '@tabler/icons-react';
 import { motion } from "framer-motion"
 
@@ -23,14 +24,12 @@ const GroupPage = () => {
         </Title>
         <div>
           <Text size="md" color="navyBlue.8">
-            You are currently#1
+            You are currently #1
           </Text>
         </div>
         <Group mt={10}>
-          <Button leftSection={<IconPlus size={20}/>} variant="gradient" size="sm">
-            Record Drink
-          </Button>
-          <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm">
+          <WaterEntryModal />
+          <Button leftSection={<IconBrandTrello size={20} />} variant="gradient" size="sm">
             Leaderboard
           </Button>
           <Button leftSection={<IconBrandTrello size={20}/>} variant="gradient" size="sm" onClick={() => {
