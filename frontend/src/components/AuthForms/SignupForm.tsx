@@ -12,17 +12,35 @@ import {
 } from '@mantine/core';
 import classes from '@/components/AuthForms/AuthForms.module.css';
 import { convertToRGBA } from '@/utils/convertToRgba';
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {FeatherContext} from "@/api/FeatherContext";
+import {useNavigate} from "react-router-dom";
 
 export function SignupForm() {
     // Styling
     const theme = useMantineTheme();
     const { colors } = theme;
     const backgrundColor = { backgroundColor: convertToRGBA('#ffffff', 0.3) };
+    const navigate = useNavigate();
 
     // Featherjs
     const featherContext = useContext(FeatherContext);
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    async function _onSignUp() {
+        try {
+            await featherContext?.service('users').create({
+                email: email,
+                name: username,
+                password: password,
+            })
+            navigate('/');
+        } catch {
+            console.log("Error creating");
+        }
+    }
 
     return (
         <Paper radius="lg" style={backgrundColor} className={classes.container}>
@@ -31,8 +49,28 @@ export function SignupForm() {
             </Title>
 
             <Paper p={30} mt={30} className={classes.form}>
-                <TextInput label="Email" placeholder="you@mantine.dev" required />
-                <PasswordInput label="Password" placeholder="Your password" required mt="md" />
+                <TextInput
+                    label="Email"
+                    placeholder="you@mantine.dev"
+                    value={email}
+                    onChange={(event) => setEmail(event.currentTarget.value)}
+                    required
+                />
+                <TextInput
+                    label="Username"
+                    placeholder="Name"
+                    value={username}
+                    onChange={(event) => setUsername(event.currentTarget.value)}
+                    required
+                />
+                <PasswordInput
+                    label="Password"
+                    placeholder="Your password"
+                    value={password}
+                    onChange={(event) => setPassword(event.currentTarget.value)}
+                    required
+                    mt="md"
+                />
                 <Button fullWidth mt="xl">
                     Create account
                 </Button>

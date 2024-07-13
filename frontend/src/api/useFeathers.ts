@@ -16,9 +16,10 @@ export type ClientApplication = Application<ServiceTypes, Configuration>;
 /////////////////////////////////////
 // DEFINE CUSTOM SERVICE FUNCTIONS //
 /////////////////////////////////////
+interface UserSocketService extends SocketService{}
 
 type ServiceTypes = {
-    [API_ROUTE.usersPath]: SocketService;
+    [API_ROUTE.usersPath]: UserSocketService;
 };
 /////////////////////////////////////
 
