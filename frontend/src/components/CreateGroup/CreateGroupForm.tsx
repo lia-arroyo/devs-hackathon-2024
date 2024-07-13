@@ -42,8 +42,8 @@ export function CreateGroupForm() {
   ];
 
   async function _onCreateGroup() {
-    const user = await featherContext?.authenticate();
     try {
+        const user = await featherContext?.authenticate();
         await featherContext?.service('groups').create({
             name: groupName,
             groupType: accountabilityType,
