@@ -32,7 +32,7 @@ export function CreateGroupForm() {
   const [groupName, setGroupName] = useState('');
   const [accountabilityType, setAccountabilityType] = useState<string | null>('');
   const [stake, setStake] = useState('');
-  
+
   // data
   const accountabilityData = [
     { value: 'water', label: 'Water Drinking' },
@@ -41,21 +41,39 @@ export function CreateGroupForm() {
     { value: 'meditation', label: 'Meditation', disabled: true },
   ];
 
+  async function _onJoinGroup(groupCode: string) {
+    if (groupCode) {
+      try {
+        const user = await featherContext?.authenticate();
+        const result = await featherContext?.service('groups').joinGroup({
+          userId: user?.user._id, // It cries in typescript. Booo hooo hooo
+          groupCode: groupCode,
+        });
+        console.log('Success joined');
+        console.log(result); // This contained the group updated
+        // todo: Perhaps redirect
+      } catch (error) {
+        console.log(error);
+        console.log('Error joining group');
+      }
+    }
+  }
+
   async function _onCreateGroup() {
     try {
-        const user = await featherContext?.authenticate();
-        await featherContext?.service('groups').create({
-            name: groupName,
-            groupType: accountabilityType,
-            ownerId: user?.user._id,
-            stakes: stake,
-            members: [user?.user._id]
-        })
-        navigate('/groups');
+      const user = await featherContext?.authenticate();
+      const group = await featherContext?.service('groups').create({
+        name: groupName,
+        groupType: accountabilityType,
+        ownerId: user?.user._id,
+        stakes: stake,
+      });
+      await _onJoinGroup(group.groupCode);
+      window.location.replace('/');
     } catch {
-        console.log("Error creating");
+      console.log('Error creating');
     }
-}
+  }
 
   return (
     <Paper radius="lg" style={backgrundColor} className={classes.container}>
@@ -88,7 +106,13 @@ export function CreateGroupForm() {
               onChange={(event) => setStake(event.currentTarget.value)}
             />
           </Flex>
-          <Button fullWidth mt="xl" onClick={() =>{_onCreateGroup()}}>
+          <Button
+            fullWidth
+            mt="xl"
+            onClick={() => {
+              _onCreateGroup();
+            }}
+          >
             Create Group
           </Button>
         </Flex>
