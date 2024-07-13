@@ -1,18 +1,12 @@
-.title {
-  font-family:
-    Greycliff CF,
-    var(--mantine-font-family);
-  font-weight: 900;
-}
-
 .container {
-  height: 60%;
   width: 50%;
   max-width: 800px;
+  min-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 2.5rem 1rem;
 }
 
 .form {
@@ -22,4 +16,5 @@
   align-items: stretch;
   justify-content: center;
   background-color: transparent;
+  margin: 0;
 }

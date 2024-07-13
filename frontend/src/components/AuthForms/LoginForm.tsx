@@ -19,7 +19,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function LoginForm() {
-  const backgroundColor = { backgroundColor: convertToRGBA('#ffffff', 0.3) };
+  const backgroundColor = { backgroundColor: convertToRGBA('#ffffff', 0.4) };
 
   // Featherjs
   const navigate = useNavigate();
@@ -52,11 +52,11 @@ export function LoginForm() {
 
   return (
     <Paper radius="lg" style={backgroundColor} className={classes.container}>
-      <Title ta="center" className={classes.title}>
+      <Title ta="center" order={2}>
         Welcome back!
       </Title>
 
-      <Paper p={30} mt={30} className={classes.form}>
+      <Paper mt={10} className={classes.form}>
         <TextInput
           label="Email"
           placeholder="you@mantine.dev"
@@ -87,7 +87,7 @@ export function LoginForm() {
         >
           Sign in
         </Button>
-        <Text c="dimmed" size="sm" ta="center" mt={5}>
+        <Text size="sm" ta="center" mt={5}>
           Do not have an account yet?{' '}
           <Anchor size="sm" component="button">
             Create account

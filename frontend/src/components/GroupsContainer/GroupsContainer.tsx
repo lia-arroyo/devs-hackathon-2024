@@ -5,7 +5,7 @@ import classes from './GroupsContainer.module.css';
 import { convertToRGBA } from '@/utils/convertToRgba';
 
 const GroupsContainer = () => {
-  const backgroundColor = { backgroundColor: convertToRGBA('#ffffff', 0.3) };
+  const backgroundColor = { backgroundColor: convertToRGBA('#ffffff', 0.4) };
 
   return (
     <Container style={backgroundColor} className={classes.groupsContainer}>
