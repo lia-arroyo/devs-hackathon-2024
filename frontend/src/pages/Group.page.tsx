@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
 import { FeatherContext } from '@/api/FeatherContext';
 import { l } from 'vite/dist/node/types.d-aGj9QkWt';
-import {useParams} from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 const GroupPage = () => {
   const data = ["Jolin's", "Lia's"];
@@ -22,7 +22,18 @@ const GroupPage = () => {
   const [percentage, setPercentage] = useState('100%');
   const featherContext = useContext(FeatherContext);
 
-  const { id: _groupCode } = useParams();
+  const { _id } = useParams();
+  const [groupData, setGroupData] = useState({});
+
+  useEffect(() => {
+    const fetchGroupData = async () => {
+      const data = await featherContext?.service('groups').get(_id as string);
+      console.log('fetching the group data here', data);
+      setGroupData(data);
+      return data;
+    };
+    fetchGroupData();
+  }, []);
 
   useEffect(() => {
     const fetchWaterLevel = async () => {
