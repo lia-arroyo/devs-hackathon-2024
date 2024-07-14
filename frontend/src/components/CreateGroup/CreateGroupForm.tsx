@@ -79,10 +79,16 @@ export function CreateGroupForm() {
     <Paper radius="lg" style={backgrundColor} className={classes.container}>
       <Paper p={30} className={classes.form}>
         <Flex justify="space-between" align="space-between" direction="column">
-          <Title ta="center" className={classes.title}>
+          <Title ta="center" order={2} c="navyBlue.9">
             Create Group
           </Title>
-          <Flex gap={rem(16)} justify="space-between" align="space-between" direction="column">
+          <Flex
+            mt={10}
+            gap={rem(16)}
+            justify="space-between"
+            align="space-between"
+            direction="column"
+          >
             <TextInput
               label="Group Name"
               placeholder="Team Hydrators..."
