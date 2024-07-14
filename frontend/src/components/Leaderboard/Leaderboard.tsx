@@ -1,6 +1,6 @@
 import cx from 'clsx';
 import { useContext, useEffect, useState } from 'react';
-import { Table, ScrollArea } from '@mantine/core';
+import { Table, ScrollArea, Text } from '@mantine/core';
 import classes from './Leaderboard.module.css';
 import { IconDroplet } from '@tabler/icons-react';
 import { IconDropletHalf2 } from '@tabler/icons-react';
@@ -83,16 +83,30 @@ export function Leaderboard({ code }: { code: string }) {
 
   const rows = leaderboardData?.map((row) => (
     <Table.Tr key={row.position}>
-      <Table.Td>#{row.position}</Table.Td>
       <Table.Td>
-        <Center>{row.name}</Center>
+        <Text color="navyBlue.9" style={{ fontSize: 14 }}>
+          {' '}
+          #{row.position}
+        </Text>
+      </Table.Td>
+      <Table.Td>
+        <Center>
+          <Text color="navyBlue.9" style={{ fontSize: 14 }}>
+            {row.name}
+          </Text>
+        </Center>
       </Table.Td>
       <Table.Td>
         {/* <div style={{ width: rem(76) }}> */}
         <Flex justify="flex-end" align="flex-end">
           <Center inline>
-            {row.waterIntake}
-            {GetWaterIcon(row.waterIntake)}
+            <Text
+              color="navyBlue.9"
+              style={{ fontSize: 14, display: 'flex', alignItems: 'center' }}
+            >
+              {row.waterIntake}
+              {GetWaterIcon(row.waterIntake)}
+            </Text>
           </Center>
         </Flex>
         {/* </div> */}
@@ -101,17 +115,31 @@ export function Leaderboard({ code }: { code: string }) {
   ));
 
   return (
-    <ScrollArea h={300} onScrollPositionChange={({ y }) => setScrolled(y !== 0)}>
+    <ScrollArea
+      h={300}
+      onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
+      style={{ paddingLeft: '1rem', paddingRight: '1rem' }}
+    >
       <Table miw={rem(300)} striped>
         <Table.Thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
           <Table.Tr>
-            <Table.Th>Position</Table.Th>
             <Table.Th>
-              <Center>Name</Center>
+              <Text color="navyBlue.9" style={{ fontWeight: 600 }}>
+                Position
+              </Text>
+            </Table.Th>
+            <Table.Th>
+              <Center>
+                <Text color="navyBlue.9" style={{ fontWeight: 600 }}>
+                  Name
+                </Text>
+              </Center>
             </Table.Th>
             <Table.Th>
               <Flex justify="flex-end" align="flex-end">
-                ml Drank
+                <Text color="navyBlue.9" style={{ fontWeight: 600 }}>
+                  Drank (ml)
+                </Text>
               </Flex>
             </Table.Th>
           </Table.Tr>
