@@ -1,17 +1,22 @@
-import { ActionIcon } from '@mantine/core';
+import { ActionIcon, useMantineTheme } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 
 export function BackButton() {
   const navigation = useNavigate();
-
+  const theme = useMantineTheme();
+  const { colors } = theme;
   const handleBackButton = () => {
     navigation(-1);
   };
 
   return (
-    <ActionIcon variant="filled" aria-label="Settings" onClick={handleBackButton}>
-      <IconArrowLeft style={{ width: '70%', height: '70%' }} stroke={1.5} />
+    <ActionIcon variant="transparent" aria-label="Settings" onClick={handleBackButton}>
+      <IconArrowLeft
+        style={{ width: '100%', height: '100%' }}
+        stroke={1.5}
+        color={colors.navyBlue[9]}
+      />
     </ActionIcon>
   );
 }

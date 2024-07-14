@@ -3,6 +3,7 @@ import { IconArrowRight } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FeatherContext } from '@/api/FeatherContext';
+import classes from './JoinGroupSection.module.css';
 import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
 
 const JoinGroupSection = () => {
@@ -33,30 +34,30 @@ const JoinGroupSection = () => {
   }
 
   return (
-    <Container style={{ margin: 0, padding: 0 }}>
+    <Container className={classes.container}>
       <Title order={4} ta="center" my={6} c="navyBlue.9">
         Join Group
       </Title>
-      <Center>
-        <Group>
-          <Input
-            type="number"
-            variant="filled"
-            placeholder={placeholderText}
-            value={groupCode ?? ''}
-            onChange={(e) => setGroupCode(e.target.value)}
-          />
-          <ActionIcon
-            variant="filled"
-            size={36}
-            color="skyBlue.7"
-            onClick={() => {
-              _onJoinGroup();
-            }}
-          >
-            <IconArrowRight />
-          </ActionIcon>
-        </Group>
+      <Center className={classes.inputContainer}>
+        <Input
+          type="number"
+          variant="filled"
+          placeholder={placeholderText}
+          value={groupCode ?? ''}
+          onChange={(e) => setGroupCode(e.target.value)}
+          className={classes.input}
+        />
+        <ActionIcon
+          variant="filled"
+          size={36}
+          color="skyBlue.7"
+          onClick={() => {
+            _onJoinGroup();
+          }}
+          className={classes.actionButton}
+        >
+          <IconArrowRight />
+        </ActionIcon>
       </Center>
     </Container>
   );

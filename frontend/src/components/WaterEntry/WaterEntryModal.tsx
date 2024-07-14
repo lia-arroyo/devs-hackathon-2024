@@ -3,7 +3,7 @@ import { Modal, Button } from '@mantine/core';
 import { WaterEntry } from './WaterEntry';
 import { IconPlus } from '@tabler/icons-react';
 
-interface Iprops{
+interface Iprops {
   setWaterlevel: any;
   closeModal: () => void;
 }
@@ -13,8 +13,8 @@ export function WaterEntryModal(props: Iprops) {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Record Water Entry" centered>
-        <WaterEntry setWaterlevel={props.setWaterlevel} closeModal={close}/>
+      <Modal opened={opened} onClose={close} centered radius={10}>
+        <WaterEntry setWaterlevel={props.setWaterlevel} closeModal={close} />
       </Modal>
 
       <Button leftSection={<IconPlus size={20} />} variant="gradient" size="sm" onClick={open}>

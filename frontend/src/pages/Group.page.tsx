@@ -86,7 +86,7 @@ const GroupPage = () => {
         <Text size="sm" color="navyBlue.8">
           {groupData.name}
         </Text>
-        <Title order={2} c="navyBlue.8">
+        <Title order={1} c="navyBlue.8">
           #{groupData.groupCode}
         </Title>
         <motion.div
@@ -97,21 +97,21 @@ const GroupPage = () => {
           transition={{ duration: 1 }}
         >
           <Text
-            size="md"
+            size="lg"
             color="navyBlue.8"
             style={{ display: visibleTextIndex === 0 ? 'block' : 'none' }}
           >
             Stakes: {groupData.stakes ? groupData.stakes : 'No stakes.'}
           </Text>
           <Text
-            size="md"
+            size="lg"
             color="navyBlue.8"
             style={{ display: visibleTextIndex === 1 ? 'block' : 'none' }}
           >
             You are currently #{ranking}
           </Text>
           <Text
-            size="md"
+            size="lg"
             color="navyBlue.8"
             style={{ display: visibleTextIndex === 2 ? 'block' : 'none' }}
           >

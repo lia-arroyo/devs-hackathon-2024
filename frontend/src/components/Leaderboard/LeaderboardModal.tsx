@@ -14,7 +14,7 @@ export function LeaderboardModal({ code }: { code: string }) {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Leaderboard" centered>
+      <Modal opened={opened} onClose={close} centered radius={10}>
         {/* Modal content */}
         <Leaderboard code={code} />
       </Modal>
