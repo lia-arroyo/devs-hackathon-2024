@@ -124,7 +124,10 @@ export function WaterEntry(props: Iprops) {
           onChange={(value) => setSelectedAmount(value)}
         />
         <Center>
-          <Text size={rem(32)}>{amountDrank}</Text>
+          <Flex align="flex-end" gap={2}>
+            <Text size={rem(32)}>{amountDrank}</Text>
+            <Text size={rem(16)}>ml</Text>
+          </Flex>
           {drinkIcon}
         </Center>
         <Center
@@ -158,6 +161,7 @@ export function WaterEntry(props: Iprops) {
           onClick={() => {
             _updateWaterIntake();
           }}
+          size="md"
         >
           Confirm
         </Button>
@@ -168,7 +172,7 @@ export function WaterEntry(props: Iprops) {
 
 const styles = {
   droplet: {
-    width: rem(64),
-    height: rem(64),
+    width: rem(50),
+    height: rem(50),
   },
 };
