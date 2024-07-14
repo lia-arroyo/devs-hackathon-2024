@@ -115,7 +115,7 @@ export function WaterEntry(props: Iprops) {
   }
   return (
     <div>
-      <Flex mih={rem(320)} direction="column" justify="space-between" align="center" pb={20}>
+      <Flex mih={rem(320)} direction="column" justify="space-between" align="center" pb={40}>
         <SegmentedControl
           radius="xl"
           size="md"
