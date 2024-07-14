@@ -8,7 +8,6 @@ import { convertToRGBA } from '@/utils/convertToRgba';
 import { motion } from 'framer-motion';
 import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
 import { FeatherContext } from '@/api/FeatherContext';
-import { l } from 'vite/dist/node/types.d-aGj9QkWt';
 import { useParams } from 'react-router-dom';
 
 const GroupPage = () => {
@@ -45,13 +44,14 @@ const GroupPage = () => {
     const fetchCurrentUser = async () => {
       const user = await featherContext?.authenticate();
       if (user) {
-        setUser(user.user);
+        const realUpdatedUser = await featherContext?.service('users').get(user.user._id);
+        setUser(realUpdatedUser);
       }
     };
 
     fetchGroupData();
     fetchCurrentUser();
-  }, []);
+  }, [featherContext, groupId]);
 
   useEffect(() => {
     const fetchWaterLevel = async () => {
