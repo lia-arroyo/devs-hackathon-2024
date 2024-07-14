@@ -1,9 +1,9 @@
 import { ActionIcon, Center, Container, Group, Input, Title } from '@mantine/core';
 import { IconArrowRight } from '@tabler/icons-react';
-import {useContext, useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import {FeatherContext} from "@/api/FeatherContext";
-import {CheckLogin} from "@/components/CheckLogin/CheckLogin";
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FeatherContext } from '@/api/FeatherContext';
+import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
 
 const JoinGroupSection = () => {
   const [groupCode, setGroupCode] = useState<string>();
@@ -12,22 +12,24 @@ const JoinGroupSection = () => {
   const placeholderText = 'Enter group code here';
 
   async function _onJoinGroup() {
-      if (groupCode) {
-            try {
-                const user = await featherContext?.authenticate();
-                console.log(user)
-                const result = await featherContext?.service('groups').joinGroup({
-                    userId: user?.user._id, // It cries in typescript. Booo hooo hooo
-                    groupCode: groupCode,
-                })
-                console.log("Success joined")
-                console.log(result) // This contained the group updated
-                // todo: Perhaps redirect
-            } catch (error) {
-                console.log(error);
-                console.log("Error joining group");
-            }
+    if (groupCode) {
+      try {
+        const user = await featherContext?.authenticate();
+        console.log(user);
+        const result = await featherContext?.service('groups').joinGroup({
+          userId: user?.user._id, // It cries in typescript. Booo hooo hooo
+          groupCode: groupCode,
+        });
+        console.log('Success joined');
+        console.log(result); // This contained the group updated
+        // todo: Perhaps redirect
+      } catch (error) {
+        console.log(error);
+        console.log('Error joining group');
+      } finally {
+        window.location.reload();
       }
+    }
   }
 
   return (
@@ -44,7 +46,14 @@ const JoinGroupSection = () => {
             value={groupCode ?? ''}
             onChange={(e) => setGroupCode(e.target.value)}
           />
-          <ActionIcon variant="filled" size={36} color="skyBlue.7" onClick={()=> {_onJoinGroup()}}>
+          <ActionIcon
+            variant="filled"
+            size={36}
+            color="skyBlue.7"
+            onClick={() => {
+              _onJoinGroup();
+            }}
+          >
             <IconArrowRight />
           </ActionIcon>
         </Group>
