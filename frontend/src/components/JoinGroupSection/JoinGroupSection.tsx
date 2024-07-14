@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FeatherContext } from '@/api/FeatherContext';
 import classes from './JoinGroupSection.module.css';
+import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
 
 const JoinGroupSection = () => {
   const [groupCode, setGroupCode] = useState<string>();
@@ -26,6 +27,8 @@ const JoinGroupSection = () => {
       } catch (error) {
         console.log(error);
         console.log('Error joining group');
+      } finally {
+        window.location.reload();
       }
     }
   }
@@ -35,7 +38,6 @@ const JoinGroupSection = () => {
       <Title order={4} ta="center" my={6} c="navyBlue.9">
         Join Group
       </Title>
-
       <Center className={classes.inputContainer}>
         <Input
           type="number"

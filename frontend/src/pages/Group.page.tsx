@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
 import { FeatherContext } from '@/api/FeatherContext';
 import { useParams } from 'react-router-dom';
+import { groupsPath } from '@/api/API_ROUTES';
 import { LeaderboardModal } from '@/components/Leaderboard/LeaderboardModal';
 
 const GroupPage = () => {
@@ -25,6 +26,7 @@ const GroupPage = () => {
   const { id: groupId } = useParams();
   const [groupData, setGroupData] = useState({});
   const [user, setUser] = useState<any>(null);
+  const [ranking, setRanking] = useState<number>(0);
 
   const [visibleTextIndex, setVisibleTextIndex] = useState(0);
 
@@ -37,22 +39,28 @@ const GroupPage = () => {
   }, []);
 
   useEffect(() => {
-    const fetchGroupData = async () => {
+    const fetchData = async () => {
       const data = await featherContext?.service('groups').get(groupId as string);
       setGroupData(data);
-    };
 
-    const fetchCurrentUser = async () => {
       const user = await featherContext?.authenticate();
       if (user) {
         const realUpdatedUser = await featherContext?.service('users').get(user.user._id);
         setUser(realUpdatedUser);
       }
-    };
 
-    fetchGroupData();
-    fetchCurrentUser();
-  }, [featherContext, groupId]);
+      const leaderboardRanking = await featherContext
+        ?.service(groupsPath)
+        .leaderboard({ groupCode: data.groupCode });
+
+      const leaderboardRank = leaderboardRanking?.findIndex(
+        (leaderboardUser) => leaderboardUser.userId === user?.user._id
+      );
+
+      setRanking((leaderboardRank ?? 0) + 1);
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchWaterLevel = async () => {
@@ -100,7 +108,7 @@ const GroupPage = () => {
             color="navyBlue.8"
             style={{ display: visibleTextIndex === 1 ? 'block' : 'none' }}
           >
-            You are currently #1
+            You are currently #{ranking}
           </Text>
           <Text
             size="lg"
