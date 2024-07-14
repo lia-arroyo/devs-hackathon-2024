@@ -44,7 +44,8 @@ const GroupPage = () => {
 
       const user = await featherContext?.authenticate();
       if (user) {
-        setUser(user.user);
+        const realUpdatedUser = await featherContext?.service('users').get(user.user._id);
+        setUser(realUpdatedUser);
       }
 
       const leaderboardRanking = await featherContext
@@ -57,7 +58,6 @@ const GroupPage = () => {
 
       setRanking((leaderboardRank ?? 0) + 1);
     };
-
     fetchData();
   }, []);
 
