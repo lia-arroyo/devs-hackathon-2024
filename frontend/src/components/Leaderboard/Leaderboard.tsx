@@ -1,5 +1,5 @@
 import cx from 'clsx';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Table, ScrollArea } from '@mantine/core';
 import classes from './Leaderboard.module.css';
 import { IconDroplet } from '@tabler/icons-react';
@@ -9,75 +9,79 @@ import { IconDropletFilled } from '@tabler/icons-react';
 import { IconDropletExclamation } from '@tabler/icons-react';
 import { rem } from '@mantine/core';
 import { Flex, Center } from '@mantine/core';
+import { groupsPath } from '@/api/API_ROUTES';
+import { FeatherContext } from '@/api/FeatherContext';
 
-const data = [
-  {
-    position: 1,
-    name: 'Jolin Chen',
-    cupsDrank: 421,
-  },
-  {
-    position: 2,
-    name: 'Water boy',
-    cupsDrank: 267,
-  },
-  {
-    position: 3,
-    name: 'Job Santos',
-    cupsDrank: 69,
-  },
-  {
-    position: 4,
-    name: 'Lia Arroyo',
-    cupsDrank: 10,
-  },
-  {
-    position: 5,
-    name: 'Frank Situ',
-    cupsDrank: 0,
-  },
-  {
-    position: 6,
-    name: 'Manav Santos',
-    cupsDrank: 0,
-  },
-  {
-    position: 7,
-    name: 'Yang Qian',
-    cupsDrank: 0,
-  },
-];
+export interface WaterIntakeData {
+  userId: string;
+  name: string;
+  waterIntake: number;
+  position?: number;
+}
 
-export function Leaderboard() {
+export function Leaderboard({ code }: { code: string }) {
+  // Featherjs
+  const featherContext = useContext(FeatherContext);
+  const retrieveLeaderboard = async () => {
+    const res = await featherContext?.service(groupsPath).leaderboard({ groupCode: code });
+    // console.log('aha');
+    // console.log(res);
+    return res;
+  };
   const [scrolled, setScrolled] = useState(false);
+  const [leaderboardData, setLeaderboardData] = useState<WaterIntakeData[]>([]);
 
-  const totalCups = data.reduce((total, row) => total + row.cupsDrank, 0);
-  const maxCups = data.reduce((max, row) => (row.cupsDrank > max ? row.cupsDrank : max), 0);
-  const halfCups = data.reduce(
-    (half, row) => (row.cupsDrank === maxCups / 2 ? row.cupsDrank : half),
-    maxCups / 2
+  // const data: WaterIntakeData[] = [];
+
+  useEffect(() => {
+    console.log('fetching leaderboard');
+    retrieveLeaderboard().then((res) => {
+      // // sort the data by waterIntake
+      // const sortedData = res?.waterIntakes.sort((a, b) => b.waterIntake - a.waterIntake);
+      // // add position
+      res?.forEach((row, i) => (row.position = i + 1));
+
+      // console.log(res);
+      //setLeaderboardData(res?.waterIntakes);
+      //console.log('res', res?.waterIntakes);
+
+      setLeaderboardData(res || []);
+    });
+  }, []);
+
+  const totalCups = leaderboardData?.reduce((total, row) => total + row?.waterIntake, 0);
+  const maxCups = leaderboardData?.reduce(
+    (max, row) => (row.waterIntake > max ? row.waterIntake : max),
+    0
   );
-  const minCups = data.reduce((min, row) => (row.cupsDrank < min ? row.cupsDrank : min), Infinity);
+  const halfCups = leaderboardData?.reduce(
+    (half, row) => (row.waterIntake === maxCups ?? 1 / 2 ? row.waterIntake : half),
+    maxCups ?? 1 / 2
+  );
+  const minCups = leaderboardData?.reduce(
+    (min, row) => (row.waterIntake < min ? row.waterIntake : min),
+    Infinity
+  );
 
-  const GetWaterIcon = (cupsDrank: number) => {
+  const GetWaterIcon = (waterIntake: number) => {
     // if the user drank the most cups
-    if (cupsDrank === maxCups) return <IconDropletFilled stroke={2} style={styles.waterIcon} />;
+    if (waterIntake === maxCups) return <IconDropletFilled stroke={2} style={styles.waterIcon} />;
 
-    if (cupsDrank > halfCups && cupsDrank < maxCups)
+    if (waterIntake > (halfCups ?? 0) && waterIntake < maxCups)
       return <IconDropletHalf2Filled stroke={2} style={styles.waterIcon} />;
 
     // if the user drank half the cups
-    if (cupsDrank === halfCups) return <IconDropletHalf2 stroke={2} style={styles.waterIcon} />;
+    if (waterIntake === halfCups) return <IconDropletHalf2 stroke={2} style={styles.waterIcon} />;
 
-    if (cupsDrank > minCups && cupsDrank < halfCups)
+    if (waterIntake > minCups && waterIntake < halfCups)
       return <IconDroplet stroke={2} style={styles.waterIcon} />;
 
     // if the user didn't drink any cups
-    if (cupsDrank === minCups || cupsDrank === 0)
+    if (waterIntake === minCups || waterIntake === 0)
       return <IconDropletExclamation stroke={2} style={styles.waterIcon} />;
   };
 
-  const rows = data.map((row) => (
+  const rows = leaderboardData?.map((row) => (
     <Table.Tr key={row.position}>
       <Table.Td>#{row.position}</Table.Td>
       <Table.Td>
@@ -87,8 +91,8 @@ export function Leaderboard() {
         {/* <div style={{ width: rem(76) }}> */}
         <Flex justify="flex-end" align="flex-end">
           <Center inline>
-            {row.cupsDrank}
-            {GetWaterIcon(row.cupsDrank)}
+            {row.waterIntake}
+            {GetWaterIcon(row.waterIntake)}
           </Center>
         </Flex>
         {/* </div> */}
@@ -107,7 +111,7 @@ export function Leaderboard() {
             </Table.Th>
             <Table.Th>
               <Flex justify="flex-end" align="flex-end">
-                Cups Drank
+                ml Drank
               </Flex>
             </Table.Th>
           </Table.Tr>
