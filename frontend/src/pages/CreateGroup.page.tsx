@@ -9,9 +9,6 @@ const CreateGroupPage = () => {
   return (
     <div className={classes.pageContainer}>
       <CheckLogin />
-      <div style={{ position: 'absolute', top: rem(16), left: rem(16) }}>
-        <BackButton />
-      </div>
       <BubblyBackground />
       <CreateGroupForm />
     </div>

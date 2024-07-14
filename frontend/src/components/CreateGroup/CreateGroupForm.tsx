@@ -13,12 +13,13 @@ import {
   rem,
   useMantineTheme,
 } from '@mantine/core';
-import classes from '@/components/AuthForms/AuthForms.module.css';
+import classes from './CreateGroup.module.css';
 import { convertToRGBA } from '@/utils/convertToRgba';
 import { useContext, useState } from 'react';
 import { FeatherContext } from '@/api/FeatherContext';
 import { useNavigate } from 'react-router-dom';
 import { identity } from '@mantine/core/lib/core/factory/factory';
+import { BackButton } from '../Navigation/BackButton';
 
 export function CreateGroupForm() {
   // Styling
@@ -77,7 +78,10 @@ export function CreateGroupForm() {
 
   return (
     <Paper radius="lg" style={backgrundColor} className={classes.container}>
-      <Paper p={30} className={classes.form}>
+      <div style={{ alignSelf: 'flex-start' }} className={classes.backButtonContainer}>
+        <BackButton />
+      </div>
+      <Paper className={classes.form}>
         <Flex justify="space-between" align="space-between" direction="column">
           <Title ta="center" order={2} c="navyBlue.9">
             Create Group
