@@ -5,12 +5,12 @@ import { IconBrandTrello } from '@tabler/icons-react';
 
 export function LeaderboardModal({ code }: { code: string }) {
   const [opened, { open, close }] = useDisclosure(false);
-  const groupCode: string = '49167101';
-  console.log('GROUP CODE IS HARDCODED!!!!!! TO ' + groupCode);
+  // const groupCode: string = '49167101';
+  // // console.log('GROUP CODE IS HARDCODED!!!!!! TO ' + groupCode);
 
-  if (code === undefined || code === '') {
-    code = groupCode;
-  }
+  // if (code === undefined || code === '') {
+  //   code = groupCode;
+  // }
 
   return (
     <>
