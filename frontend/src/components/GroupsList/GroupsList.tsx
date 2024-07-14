@@ -88,7 +88,6 @@ const GroupsList = () => {
         >
           Create New Group
         </Button>
-        <Button onClick={() => console.log(groups)}>blah</Button>
       </div>
     </Container>
   );
