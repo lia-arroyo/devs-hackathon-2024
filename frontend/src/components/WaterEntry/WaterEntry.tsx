@@ -20,9 +20,9 @@ import { useState, useContext } from 'react';
 import { FeatherContext } from '@/api/FeatherContext';
 import { useNavigate } from 'react-router-dom';
 
-interface Iprops{
-  setWaterlevel: any
-  closeModal: () => void
+interface Iprops {
+  setWaterlevel: any;
+  closeModal: () => void;
 }
 
 // setWaterlevel('50%')
@@ -93,7 +93,7 @@ export function WaterEntry(props: Iprops) {
   async function _updateWaterIntake() {
     try {
       const user = await featherContext?.authenticate();
-      const realUpdatedUser = await featherContext?.service("users").get(user?.user._id);
+      const realUpdatedUser = await featherContext?.service('users').get(user?.user._id);
       const newWater = amountDrank + realUpdatedUser?.waterIntake;
       const updatedUser = await featherContext?.service('users').patch(user?.user._id, {
         waterIntake: newWater,
@@ -109,20 +109,19 @@ export function WaterEntry(props: Iprops) {
       props.setWaterlevel(percentage);
     } catch {
       console.log('Error updating water intake');
-    }
-    finally{
-      window.location.reload()
+    } finally {
+      window.location.reload();
     }
   }
   return (
     <div>
-      <Flex mih={rem(250)} direction="column" justify="space-between" align="center">
-        <SegmentedControl 
-        radius="xl" 
-        size="md" 
-        classNames={classes} 
-        data={headerButtonLabels} 
-        onChange={(value) => setSelectedAmount(value)}
+      <Flex mih={rem(320)} direction="column" justify="space-between" align="center" pb={20}>
+        <SegmentedControl
+          radius="xl"
+          size="md"
+          classNames={classes}
+          data={headerButtonLabels}
+          onChange={(value) => setSelectedAmount(value)}
         />
         <Center>
           <Text size={rem(32)}>{amountDrank}</Text>
@@ -155,7 +154,13 @@ export function WaterEntry(props: Iprops) {
             +
           </ActionIcon>
         </Center>
-        <Button onClick={() =>{_updateWaterIntake()}}>Confirm</Button>
+        <Button
+          onClick={() => {
+            _updateWaterIntake();
+          }}
+        >
+          Confirm
+        </Button>
       </Flex>
     </div>
   );
