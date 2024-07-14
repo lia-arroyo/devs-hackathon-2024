@@ -111,7 +111,7 @@ export function Leaderboard({ code }: { code: string }) {
             </Table.Th>
             <Table.Th>
               <Flex justify="flex-end" align="flex-end">
-                Cups Drank
+                ml Drank
               </Flex>
             </Table.Th>
           </Table.Tr>
