@@ -110,6 +110,9 @@ export function WaterEntry(props: Iprops) {
     } catch {
       console.log('Error updating water intake');
     }
+    finally{
+      window.location.reload()
+    }
   }
   return (
     <div>

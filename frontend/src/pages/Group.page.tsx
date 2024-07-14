@@ -8,8 +8,8 @@ import { convertToRGBA } from '@/utils/convertToRgba';
 import { motion } from 'framer-motion';
 import { CheckLogin } from '@/components/CheckLogin/CheckLogin';
 import { FeatherContext } from '@/api/FeatherContext';
-import { l } from 'vite/dist/node/types.d-aGj9QkWt';
 import { useParams } from 'react-router-dom';
+import { LeaderboardModal } from '@/components/Leaderboard/LeaderboardModal';
 
 const GroupPage = () => {
   const data = ["Jolin's", "Lia's"];
@@ -45,13 +45,14 @@ const GroupPage = () => {
     const fetchCurrentUser = async () => {
       const user = await featherContext?.authenticate();
       if (user) {
-        setUser(user.user);
+        const realUpdatedUser = await featherContext?.service('users').get(user.user._id);
+        setUser(realUpdatedUser);
       }
     };
 
     fetchGroupData();
     fetchCurrentUser();
-  }, []);
+  }, [featherContext, groupId]);
 
   useEffect(() => {
     const fetchWaterLevel = async () => {
@@ -111,9 +112,7 @@ const GroupPage = () => {
         </motion.div>
         <Group mt={10}>
           <WaterEntryModal setWaterlevel={setPercentage} />
-          <Button leftSection={<IconBrandTrello size={20} />} variant="gradient" size="sm">
-            Leaderboard
-          </Button>
+          <LeaderboardModal code={groupData.groupCode} />
         </Group>
         <div className={classes.waveContainer}>
           <motion.div
