@@ -58,6 +58,7 @@ export function SignupForm() {
           placeholder="you@mantine.dev"
           value={email}
           onChange={(event) => setEmail(event.currentTarget.value)}
+          mt="sm"
           required
           classNames={{ label: classes.label }}
         />
@@ -66,6 +67,7 @@ export function SignupForm() {
           placeholder="Name"
           value={username}
           onChange={(event) => setUsername(event.currentTarget.value)}
+          mt="sm"
           required
           classNames={{ label: classes.label }}
         />
@@ -75,7 +77,7 @@ export function SignupForm() {
           value={password}
           onChange={(event) => setPassword(event.currentTarget.value)}
           required
-          mt="md"
+          mt="sm"
           classNames={{ label: classes.label }}
         />
         <Button
