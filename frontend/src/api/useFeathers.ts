@@ -4,7 +4,7 @@ import type { SocketService } from '@feathersjs/socketio-client';
 import socketio from '@feathersjs/socketio-client';
 import authentication from '@feathersjs/authentication-client';
 import * as API_ROUTE from './API_ROUTES';
-import { WaterIntakeData } from '@/components/Leaderboard/Leaderboard';
+import { WaterIntakeData } from '@/types/waterIntake';
 
 const API_URI = 'http://localhost:3030/';
 
@@ -19,7 +19,7 @@ export type ClientApplication = Application<ServiceTypes, Configuration>;
 /////////////////////////////////////
 interface UserSocketService extends SocketService {}
 interface GroupSocketService extends SocketService {
-  joinGroup: (data: { userId: string; gameCode: string }) => Promise<{
+  joinGroup: (data: { userId: string; groupCode: string }) => Promise<{
     name: string;
     members: string[];
     groupType: string;
@@ -27,7 +27,7 @@ interface GroupSocketService extends SocketService {
     groupCode: string;
     stakes: string;
   }>;
-  leaveGroup: (data: { userId: string; gameCode: string }) => Promise<{
+  leaveGroup: (data: { userId: string; groupCode: string }) => Promise<{
     name: string;
     members: string[];
     groupType: string;
